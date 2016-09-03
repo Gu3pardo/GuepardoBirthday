@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/Primary"
+    android:padding="2dp" >
+
+    <Button
+        android:id="@+id/birthday_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp"
+        android:layout_toStartOf="@+id/birthday_item_date"
+        android:background="@drawable/button_blank"
+        android:gravity="center_vertical|start"
+        android:text="@string/example"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/TextIcon"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/birthday_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:layout_toStartOf="@+id/birthday_item_image"
+        android:text="@string/example"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/TextIcon" />
+
+    <ImageView
+        android:id="@+id/birthday_item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ic_launcher"
+        android:visibility="invisible" />
+
+</RelativeLayout>

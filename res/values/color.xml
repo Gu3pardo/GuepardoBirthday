@@ -1,0 +1,17 @@
+<resources>
+
+    <color name="DarkPrimary">#f57c00</color>
+    <color name="Primary">#ff9800</color>
+    <color name="LightPrimary">#ffe0b2</color>
+    <color name="TextIcon">#212121</color>
+    <color name="Accent">#ff5252</color>
+    <color name="PrimaryText">#212121</color>
+    <color name="SecondaryText">#727272</color>
+    <color name="Divider">#b6b6b6</color>
+    
+    <color name="DarkRed">#D32F2F</color>
+    <color name="LightRed">#F44336</color>
+    <color name="DarkGreen">#388E3C</color>
+    <color name="LightGreen">#4CAF50</color>
+
+</resources>
