@@ -1,10 +1,4 @@
-package guepardoapps.guepardobirthdays;
-
-import guepardoapps.toolset.classes.Birthday;
-import guepardoapps.toolset.controller.NavigationController;
-import guepardoapps.toolset.controller.SharedPrefController;
-import guepardoapps.common.Constants;
-import guepardoapps.controller.*;
+package guepardoapps.guepardobirthdays.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,12 +6,20 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import guepardoapps.guepardobirthday.common.Constants;
+import guepardoapps.guepardobirthday.controller.*;
+import guepardoapps.guepardobirthday.model.Birthday;
+import guepardoapps.guepardobirthdays.R;
+
+import guepardoapps.toolset.controller.SharedPrefController;
+import guepardoapps.toolset.services.NavigationService;
+
 public class ActivityBoot extends Activity {
 
 	private Context _context;
 
 	private DatabaseController _databaseController;
-	private NavigationController _navigationController;
+	private NavigationService _navigationService;
 	private SharedPrefController _sharedPrefController;
 
 	private SharedPreferences initialStart;
@@ -31,7 +33,7 @@ public class ActivityBoot extends Activity {
 		_context = this;
 
 		_databaseController = new DatabaseController(_context);
-		_navigationController = new NavigationController(_context);
+		_navigationService = new NavigationService(_context);
 		_sharedPrefController = new SharedPrefController(_context, Constants.SHARED_PREF_NAME);
 
 		initialStart = getSharedPreferences(Constants.SHARED_PREF_NAME, 0);
@@ -41,12 +43,12 @@ public class ActivityBoot extends Activity {
 			_sharedPrefController.SaveBooleanValue(Constants.SHARED_PREF_NAME, true);
 		}
 
-		_navigationController.NavigateTo(ActivityMain.class, true);
+		_navigationService.NavigateTo(ActivityMain.class, true);
 	}
 
 	protected void onResume() {
 		super.onResume();
-		_navigationController.NavigateTo(ActivityMain.class, true);
+		_navigationService.NavigateTo(ActivityMain.class, true);
 	}
 
 	@Override

@@ -1,11 +1,11 @@
-package guepardoapps.controller;
+package guepardoapps.guepardobirthday.controller;
 
 import java.util.ArrayList;
 
-import guepardoapps.toolset.classes.Birthday;
-import guepardoapps.database.Database;
-
 import android.content.Context;
+
+import guepardoapps.guepardobirthday.database.Database;
+import guepardoapps.guepardobirthday.model.Birthday;
 
 public class DatabaseController {
 

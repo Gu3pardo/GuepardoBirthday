@@ -1,10 +1,4 @@
-package guepardoapps.guepardobirthdays;
-
-import guepardoapps.toolset.classes.Birthday;
-import guepardoapps.common.Constants;
-import guepardoapps.controller.DatabaseController;
-import guepardoapps.toolset.controller.DialogController;
-import guepardoapps.guepardobirthdays.R;
+package guepardoapps.guepardobirthdays.activities;
 
 import java.util.Calendar;
 
@@ -17,9 +11,17 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import guepardoapps.guepardobirthdays.R;
+import guepardoapps.guepardobirthday.common.Constants;
+import guepardoapps.guepardobirthday.controller.DatabaseController;
+import guepardoapps.guepardobirthday.model.Birthday;
+
+import guepardoapps.toolset.controller.DialogController;
 
 public class ActivityAdd extends Activity {
 
@@ -51,13 +53,13 @@ public class ActivityAdd extends Activity {
 		_context = this;
 
 		_databaseController = new DatabaseController(_context);
-		_dialogController = new DialogController(_context, getResources().getColor(R.color.TextIcon), getResources().getColor(R.color.Primary));
+		_dialogController = new DialogController(_context, getResources().getColor(R.color.TextIcon),
+				getResources().getColor(R.color.Primary));
 
 		_today = Calendar.getInstance();
 
 		_nameEdit = (EditText) findViewById(R.id.nameEditText);
 		_nameEdit.addTextChangedListener(new TextWatcher() {
-
 			@Override
 			public void afterTextChanged(Editable s) {
 			}
@@ -74,7 +76,6 @@ public class ActivityAdd extends Activity {
 
 		_dayEdit = (EditText) findViewById(R.id.dayEditText);
 		_dayEdit.addTextChangedListener(new TextWatcher() {
-
 			@Override
 			public void afterTextChanged(Editable s) {
 			}
@@ -86,12 +87,27 @@ public class ActivityAdd extends Activity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				_day = _dayEdit.getText().toString();
+
+				try {
+					if (Integer.parseInt(_day) < 1 || Integer.parseInt(_day) > 31) {
+						_dayEdit.setText("");
+					}
+				} catch (Exception e) {
+					// TODO add logger
+				}
+
+				if (_day.length() > 2) {
+					_dayEdit.setText("" + _day.charAt(0) + _day.charAt(1));
+				}
+
+				if (_day.length() == 2) {
+					_monthEdit.requestFocus();
+				}
 			}
 		});
 
 		_monthEdit = (EditText) findViewById(R.id.monthEditText);
 		_monthEdit.addTextChangedListener(new TextWatcher() {
-
 			@Override
 			public void afterTextChanged(Editable s) {
 			}
@@ -103,12 +119,27 @@ public class ActivityAdd extends Activity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				_month = _monthEdit.getText().toString();
+
+				try {
+					if (Integer.parseInt(_month) < 1 || Integer.parseInt(_month) > 12) {
+						_monthEdit.setText("");
+					}
+				} catch (Exception e) {
+					// TODO add logger
+				}
+
+				if (_month.length() > 2) {
+					_monthEdit.setText("" + _month.charAt(0) + _month.charAt(1));
+				}
+
+				if (_month.length() == 2) {
+					_yearEdit.requestFocus();
+				}
 			}
 		});
 
 		_yearEdit = (EditText) findViewById(R.id.yearEditText);
 		_yearEdit.addTextChangedListener(new TextWatcher() {
-
 			@Override
 			public void afterTextChanged(Editable s) {
 			}
@@ -120,6 +151,28 @@ public class ActivityAdd extends Activity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				_year = _yearEdit.getText().toString();
+
+				try {
+					if (Integer.parseInt(_year) < 1900
+							|| Integer.parseInt(_year) > Calendar.getInstance().get(Calendar.YEAR)) {
+						// _yearEdit.setText("");
+					}
+				} catch (Exception e) {
+					// TODO add logger
+				}
+
+				if (_year.length() > 4) {
+					_yearEdit.setText("" + _year.charAt(0) + _year.charAt(1) + _year.charAt(2) + _year.charAt(3));
+				}
+
+				if (_year.length() == 4) {
+					// Hide soft keyboard
+					View view = ((Activity) _context).getCurrentFocus();
+					if (view != null) {
+						InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+						imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+					}
+				}
 			}
 		});
 
@@ -139,7 +192,7 @@ public class ActivityAdd extends Activity {
 				_dialogController.ShowDialogTriple("Warning!",
 						"The created birthday is not saved! Do you want to save the birthday?", "Yes",
 						trySaveNewBirthdayCallback, "No", finishCallback, "Cancel",
-						_dialogController.closeDialogCallback, true);
+						_dialogController.CloseDialogCallback, true);
 			} else {
 				finishCallback.run();
 			}
@@ -155,12 +208,14 @@ public class ActivityAdd extends Activity {
 				return;
 			}
 
-			if (_day == null || _month == null || _year == null) {
+			if (_day == null || _month == null || _year == null || _day.length() < 1 || _month.length() < 1
+					|| _year.length() != 4) {
 				Toast.makeText(_context, "Please select a valid date!", Toast.LENGTH_SHORT).show();
 				return;
 			}
 
-			if (Integer.parseInt(_year) > _today.get(Calendar.YEAR)) {
+			if (Integer.parseInt(_year) < 1900 || Integer.parseInt(_year) > _today.get(Calendar.YEAR)) {
+				_yearEdit.setText("");
 				Toast.makeText(_context, "Please select a valid year!", Toast.LENGTH_SHORT).show();
 				return;
 			}

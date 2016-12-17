@@ -1,10 +1,5 @@
-package guepardoapps.guepardobirthdays;
+package guepardoapps.guepardobirthdays.activities;
 
-import guepardoapps.toolset.classes.Birthday;
-import guepardoapps.common.*;
-import guepardoapps.controller.DatabaseController;
-import guepardoapps.guepardobirthdays.R;
-import guepardoapps.particles.ParticleSystem;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -15,10 +10,19 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import guepardoapps.guepardobirthday.common.*;
+import guepardoapps.guepardobirthday.controller.DatabaseController;
+import guepardoapps.guepardobirthday.model.Birthday;
+import guepardoapps.guepardobirthdays.R;
+
+import guepardoapps.particles.ParticleSystem;
+import guepardoapps.toolset.controller.DialogController;
+
 public class ActivityDetails extends Activity {
 
 	private Context _context;
 	private DatabaseController _databaseController;
+	private DialogController _dialogController;
 
 	private Birthday _birthday;
 
@@ -26,6 +30,16 @@ public class ActivityDetails extends Activity {
 	private Button _btnDelete;
 	private RelativeLayout _background;
 
+	private Runnable _deleteEntryRunnable = new Runnable() {
+		@Override
+		public void run() {
+			_dialogController.CloseDialogCallback.run();
+			_databaseController.DeleteBirthday(_birthday);
+			finish();
+		}
+	};
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,6 +48,8 @@ public class ActivityDetails extends Activity {
 
 		_context = this;
 		_databaseController = new DatabaseController(_context);
+		_dialogController = new DialogController(_context, getResources().getColor(R.color.TextIcon),
+				getResources().getColor(R.color.Primary));
 
 		Bundle detail = getIntent().getExtras();
 		_birthday = new Birthday(detail.getInt(Constants.BIRTHDAY_DETAIL_BUNDLE_TYPE_ID),
@@ -46,7 +62,7 @@ public class ActivityDetails extends Activity {
 		if (_birthday.HasBirthday()) {
 			_background.setBackgroundColor(Constants.MARKED_BIRTHDAY_COLOR);
 
-			new ParticleSystem((Activity) _context, 100, R.drawable.particle, 750)
+			new ParticleSystem((Activity) _context, 100, R.drawable.particle, 750, 1, 255)
 					.setSpeedModuleAndAngleRange(0f, 0.3f, 0, 90).setRotationSpeed(25).setAcceleration(0.00005f, 45)
 					.emit(findViewById(R.id.nameTextView), 100);
 		}
@@ -71,9 +87,9 @@ public class ActivityDetails extends Activity {
 		_btnDelete = (Button) findViewById(R.id.detailDelete);
 		_btnDelete.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				_databaseController.DeleteBirthday(_birthday);
-				finish();
+			public void onClick(View view) {
+				_dialogController.ShowDialogDouble("Delete entry " + _birthday.GetName() + "?", "", "Delete",
+						_deleteEntryRunnable, "Cancel", _dialogController.CloseDialogCallback, true);
 			}
 		});
 	}

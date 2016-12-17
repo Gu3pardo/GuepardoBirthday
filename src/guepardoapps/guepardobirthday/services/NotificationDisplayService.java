@@ -1,4 +1,4 @@
-package guepardoapps.services;
+package guepardoapps.guepardobirthday.services;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,9 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-import guepardoapps.common.Constants;
-import guepardoapps.guepardobirthdays.ActivityMain;
+import guepardoapps.guepardobirthday.common.Constants;
 import guepardoapps.guepardobirthdays.R;
+import guepardoapps.guepardobirthdays.activities.ActivityMain;
 
 public class NotificationDisplayService extends Service {
 
