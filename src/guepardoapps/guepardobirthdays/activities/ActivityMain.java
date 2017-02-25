@@ -15,7 +15,7 @@ import guepardoapps.guepardobirthday.controller.DatabaseController;
 import guepardoapps.guepardobirthday.customadapter.BirthdayListAdapter;
 import guepardoapps.guepardobirthdays.R;
 
-import guepardoapps.toolset.services.NavigationService;
+import guepardoapps.toolset.controller.NavigationController;
 
 public class ActivityMain extends Activity {
 
@@ -23,7 +23,7 @@ public class ActivityMain extends Activity {
 
 	private Context _context;
 	private DatabaseController _databaseController;
-	private NavigationService _navigationService;
+	private NavigationController _navigationController;
 
 	private ProgressBar _progressBar;
 	private ListView _listView;
@@ -37,7 +37,7 @@ public class ActivityMain extends Activity {
 
 		_context = this;
 		_databaseController = new DatabaseController(_context);
-		_navigationService = new NavigationService(_context);
+		_navigationController = new NavigationController(_context);
 
 		_listView = (ListView) findViewById(R.id.listView);
 
@@ -45,7 +45,7 @@ public class ActivityMain extends Activity {
 		_btnAdd.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				_navigationService.NavigateTo(ActivityAdd.class, false);
+				_navigationController.NavigateTo(ActivityAdd.class, false);
 			}
 		});
 
@@ -53,7 +53,7 @@ public class ActivityMain extends Activity {
 		_btnImpressum.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				_navigationService.NavigateTo(ActivityImpressum.class, false);
+				_navigationController.NavigateTo(ActivityImpressum.class, false);
 			}
 		});
 
@@ -69,6 +69,7 @@ public class ActivityMain extends Activity {
 			_listView.setAdapter(new BirthdayListAdapter(_context, _databaseController.GetBirthdays()));
 			_progressBar.setVisibility(View.GONE);
 			_listView.setVisibility(View.VISIBLE);
+
 		}
 	}
 

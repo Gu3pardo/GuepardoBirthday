@@ -23,12 +23,12 @@ import guepardoapps.guepardobirthdays.activities.ActivityDetails;
 
 import guepardoapps.particles.ParticleSystem;
 
-import guepardoapps.toolset.services.NavigationService;
+import guepardoapps.toolset.controller.NavigationController;
 
 public class BirthdayListAdapter extends BaseAdapter {
 
 	private Context _context;
-	private NavigationService _navigationService;
+	private NavigationController _navigationController;
 
 	private ArrayList<Birthday> _birthdays;
 
@@ -36,7 +36,7 @@ public class BirthdayListAdapter extends BaseAdapter {
 
 	public BirthdayListAdapter(Context context, ArrayList<Birthday> birthdays) {
 		_context = context;
-		_navigationService = new NavigationService(_context);
+		_navigationController = new NavigationController(_context);
 
 		_birthdays = birthdays;
 
@@ -110,7 +110,7 @@ public class BirthdayListAdapter extends BaseAdapter {
 				details.putInt(Constants.BIRTHDAY_DETAIL_BUNDLE_TYPE_MONTH, _birthdays.get(index).GetMonth());
 				details.putInt(Constants.BIRTHDAY_DETAIL_BUNDLE_TYPE_YEAR, _birthdays.get(index).GetYear());
 
-				_navigationService.NavigateWithData(ActivityDetails.class, details, false);
+				_navigationController.NavigateWithData(ActivityDetails.class, details, false);
 			}
 		});
 		return rowView;

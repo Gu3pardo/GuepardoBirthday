@@ -33,14 +33,14 @@
             android:textColor="@color/TextIcon" />
     </FrameLayout>
 
-        <Button
-            android:id="@+id/btnImpressum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/button"
-            android:text="@string/impressum"
-            android:textColor="@color/TextIcon" />
+    <Button
+        android:id="@+id/btnImpressum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:text="@string/impressum"
+        android:textColor="@color/TextIcon" />
 
 </RelativeLayout>
