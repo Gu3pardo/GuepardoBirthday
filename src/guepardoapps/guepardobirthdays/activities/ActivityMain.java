@@ -10,14 +10,18 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import guepardoapps.guepardobirthday.common.Constants;
+import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.controller.DatabaseController;
 import guepardoapps.guepardobirthday.customadapter.BirthdayListAdapter;
 import guepardoapps.guepardobirthdays.R;
 
+import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.NavigationController;
 
 public class ActivityMain extends Activity {
+
+	private static final String TAG = ActivityMain.class.getSimpleName();
+	private Logger _logger;
 
 	private boolean _created;
 
@@ -33,7 +37,10 @@ public class ActivityMain extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.side_main);
-		getActionBar().setBackgroundDrawable(new ColorDrawable(Constants.ACTION_BAR_COLOR));
+		getActionBar().setBackgroundDrawable(new ColorDrawable(Colors.ACTION_BAR_COLOR));
+
+		_logger = new Logger(TAG, Enables.DEBUGGING_ENABLED);
+		_logger.Debug("onCreate");
 
 		_context = this;
 		_databaseController = new DatabaseController(_context);
@@ -45,6 +52,7 @@ public class ActivityMain extends Activity {
 		_btnAdd.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				_logger.Debug("_btnAdd onClick");
 				_navigationController.NavigateTo(ActivityAdd.class, false);
 			}
 		});
@@ -53,6 +61,7 @@ public class ActivityMain extends Activity {
 		_btnImpressum.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				_logger.Debug("_btnImpressum onClick");
 				_navigationController.NavigateTo(ActivityImpressum.class, false);
 			}
 		});
@@ -64,22 +73,12 @@ public class ActivityMain extends Activity {
 
 	protected void onResume() {
 		super.onResume();
+		_logger.Debug("onResume");
 
 		if (_created) {
 			_listView.setAdapter(new BirthdayListAdapter(_context, _databaseController.GetBirthdays()));
 			_progressBar.setVisibility(View.GONE);
 			_listView.setVisibility(View.VISIBLE);
-
 		}
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
 	}
 }

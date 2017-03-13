@@ -32,6 +32,8 @@
     <string name="contentDescription">This is an image</string>
     
     <string name="impressum">Impressum</string>
-    <string name="impressumContent">Jonas Schubert\nGuepardoApps\nE-Mail: guepardoapps@gmail.com</string>
+    <string name="author">Jonas Schubert\nGuepardoApps</string>
+    <string name="email">E-Mail: guepardoapps@gmail.com</string>
+    <string name="githubLink">https://github.com/Gu3pardo/GuepardoBirthday/</string>
     
 </resources>

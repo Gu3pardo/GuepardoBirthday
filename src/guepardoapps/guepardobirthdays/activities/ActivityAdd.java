@@ -16,14 +16,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import es.dmoral.toasty.Toasty;
+
 import guepardoapps.guepardobirthdays.R;
-import guepardoapps.guepardobirthday.common.Constants;
+import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.controller.DatabaseController;
 import guepardoapps.guepardobirthday.model.Birthday;
 
+import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.DialogController;
 
 public class ActivityAdd extends Activity {
+
+	private static final String TAG = ActivityAdd.class.getSimpleName();
+	private Logger _logger;
 
 	private Context _context;
 
@@ -43,12 +49,49 @@ public class ActivityAdd extends Activity {
 
 	private Calendar _today;
 
+	private Runnable _trySaveNewBirthdayCallback = new Runnable() {
+		public void run() {
+			if (_name == null || _name.length() < 3) {
+				Toasty.error(_context, "Please enter a valid name!", Toast.LENGTH_SHORT).show();
+				return;
+			}
+
+			if (_day == null || _month == null || _year == null || _day.length() < 1 || _month.length() < 1
+					|| _year.length() != 4) {
+				Toasty.error(_context, "Please select a valid date!", Toast.LENGTH_SHORT).show();
+				return;
+			}
+
+			if (Integer.parseInt(_year) < 1900 || Integer.parseInt(_year) > _today.get(Calendar.YEAR)) {
+				_yearEdit.setText("");
+				Toasty.error(_context, "Please select a valid year!", Toast.LENGTH_SHORT).show();
+				return;
+			}
+
+			_databaseController.CreateBirthday(
+					new Birthday(0, _name, Integer.parseInt(_day), Integer.parseInt(_month), Integer.parseInt(_year)));
+
+			Toasty.success(_context, "Saved new entry " + _name, Toast.LENGTH_LONG).show();
+
+			finish();
+		}
+	};
+
+	private Runnable _finishCallback = new Runnable() {
+		public void run() {
+			finish();
+		}
+	};
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.side_add);
-		getActionBar().setBackgroundDrawable(new ColorDrawable(Constants.ACTION_BAR_COLOR));
+		getActionBar().setBackgroundDrawable(new ColorDrawable(Colors.ACTION_BAR_COLOR));
+
+		_logger = new Logger(TAG, Enables.DEBUGGING_ENABLED);
+		_logger.Debug("onCreate");
 
 		_context = this;
 
@@ -93,7 +136,7 @@ public class ActivityAdd extends Activity {
 						_dayEdit.setText("");
 					}
 				} catch (Exception e) {
-					// TODO add logger
+					_logger.Error(e.toString());
 				}
 
 				if (_day.length() > 2) {
@@ -125,7 +168,7 @@ public class ActivityAdd extends Activity {
 						_monthEdit.setText("");
 					}
 				} catch (Exception e) {
-					// TODO add logger
+					_logger.Error(e.toString());
 				}
 
 				if (_month.length() > 2) {
@@ -158,7 +201,7 @@ public class ActivityAdd extends Activity {
 						// _yearEdit.setText("");
 					}
 				} catch (Exception e) {
-					// TODO add logger
+					_logger.Error(e.toString());
 				}
 
 				if (_year.length() > 4) {
@@ -180,56 +223,28 @@ public class ActivityAdd extends Activity {
 		_btnAdd.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				trySaveNewBirthdayCallback.run();
+				_logger.Debug("_btnAdd onClick");
+				_trySaveNewBirthdayCallback.run();
 			}
 		});
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		_logger.Debug("onKeyDown");
+
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (_name != null || _day != null || _month != null || _year != null) {
 				_dialogController.ShowDialogTriple("Warning!",
 						"The created birthday is not saved! Do you want to save the birthday?", "Yes",
-						trySaveNewBirthdayCallback, "No", finishCallback, "Cancel",
+						_trySaveNewBirthdayCallback, "No", _finishCallback, "Cancel",
 						_dialogController.CloseDialogCallback, true);
 			} else {
-				finishCallback.run();
+				_finishCallback.run();
 			}
 			return true;
 		}
+
 		return super.onKeyDown(keyCode, event);
 	}
-
-	private Runnable trySaveNewBirthdayCallback = new Runnable() {
-		public void run() {
-			if (_name == null || _name.length() < 3) {
-				Toast.makeText(_context, "Please enter a valid name!", Toast.LENGTH_SHORT).show();
-				return;
-			}
-
-			if (_day == null || _month == null || _year == null || _day.length() < 1 || _month.length() < 1
-					|| _year.length() != 4) {
-				Toast.makeText(_context, "Please select a valid date!", Toast.LENGTH_SHORT).show();
-				return;
-			}
-
-			if (Integer.parseInt(_year) < 1900 || Integer.parseInt(_year) > _today.get(Calendar.YEAR)) {
-				_yearEdit.setText("");
-				Toast.makeText(_context, "Please select a valid year!", Toast.LENGTH_SHORT).show();
-				return;
-			}
-
-			_databaseController.CreateBirthday(
-					new Birthday(0, _name, Integer.parseInt(_day), Integer.parseInt(_month), Integer.parseInt(_year)));
-
-			finish();
-		}
-	};
-
-	private Runnable finishCallback = new Runnable() {
-		public void run() {
-			finish();
-		}
-	};
 }

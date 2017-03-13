@@ -113,7 +113,7 @@ public final class R {
         public static final int birthday_item_name=0x7f0a0009;
         public static final int border0=0x7f0a0014;
         public static final int border1=0x7f0a0016;
-        public static final int btnImpressum=0x7f0a0020;
+        public static final int btnImpressum=0x7f0a0021;
         public static final int custom_alert_dialog_background=0x7f0a0000;
         public static final int custom_alert_dialog_btn_cancel=0x7f0a0004;
         public static final int custom_alert_dialog_btn_neutral=0x7f0a0005;
@@ -125,24 +125,25 @@ public final class R {
         public static final int detailBackground=0x7f0a0012;
         public static final int detailDelete=0x7f0a001a;
         public static final int detailsLayout=0x7f0a0015;
-        public static final int farmListFrame=0x7f0a001f;
+        public static final int farmListFrame=0x7f0a0020;
         public static final int floating_message_background=0x7f0a0006;
         public static final int floating_message_text=0x7f0a0008;
         public static final int floating_message_title=0x7f0a0007;
-        public static final int goToAddView=0x7f0a0023;
+        public static final int goToAddView=0x7f0a0024;
         public static final int iconFrame=0x7f0a0013;
-        public static final int impressumContent=0x7f0a001d;
-        public static final int listView=0x7f0a0022;
+        public static final int impressumAuthor=0x7f0a001d;
+        public static final int impressumEmail=0x7f0a001e;
+        public static final int impressumGithub=0x7f0a001f;
+        public static final int listView=0x7f0a0023;
         public static final int monthEditText=0x7f0a000f;
         public static final int nameEditText=0x7f0a000d;
         public static final int nameTextView=0x7f0a0017;
-        public static final int progressBar=0x7f0a0021;
-        public static final int test=0x7f0a001e;
+        public static final int progressBar=0x7f0a0022;
         public static final int titleBirthday=0x7f0a000c;
         public static final int title_impressum=0x7f0a001b;
-        public static final int toast_icon=0x7f0a0025;
-        public static final int toast_root=0x7f0a0024;
-        public static final int toast_text=0x7f0a0026;
+        public static final int toast_icon=0x7f0a0026;
+        public static final int toast_root=0x7f0a0025;
+        public static final int toast_text=0x7f0a0027;
         public static final int yearEditText=0x7f0a0010;
     }
     public static final class layout {
@@ -168,6 +169,7 @@ public final class R {
         public static final int advanced_settings=0x7f050033;
         public static final int app_intro=0x7f05002f;
         public static final int app_name=0x7f050000;
+        public static final int author=0x7f050050;
         public static final int back=0x7f050041;
         /** Detail page strings
 Detail page strings
@@ -298,14 +300,15 @@ Detail page strings
         public static final int dismiss_overlay_button_label=0x7f050038;
         public static final int distance=0x7f050015;
         public static final int edit=0x7f05003a;
+        public static final int email=0x7f050051;
         public static final int example=0x7f05004d;
+        public static final int githubLink=0x7f050052;
         public static final int hint=0x7f05004c;
         public static final int hint_day_birthday=0x7f050049;
         public static final int hint_month_birthday=0x7f05004a;
         public static final int hint_name_birthday=0x7f050048;
         public static final int hint_year_birthday=0x7f05004b;
         public static final int impressum=0x7f05004f;
-        public static final int impressumContent=0x7f050050;
         /**  List item strings 
  List item strings 
  List item strings 

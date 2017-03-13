@@ -9,20 +9,20 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import guepardoapps.guepardobirthday.common.Constants;
+import guepardoapps.guepardobirthday.common.DatabaseConstants;
 import guepardoapps.guepardobirthday.model.Birthday;
 
 public class Database {
 
-	public static final String KEY_ROWID = Constants.DATABASE_KEY_ROWID;
-	public static final String KEY_NAMES = Constants.DATABASE_KEY_NAMES;
-	public static final String KEY_DAYS = Constants.DATABASE_KEY_DAYS;
-	public static final String KEY_MONTHS = Constants.DATABASE_KEY_MONTHS;
-	public static final String KEY_YEARS = Constants.DATABASE_KEY_YEARS;
+	public static final String KEY_ROWID = DatabaseConstants.DATABASE_KEY_ROWID;
+	public static final String KEY_NAMES = DatabaseConstants.DATABASE_KEY_NAMES;
+	public static final String KEY_DAYS = DatabaseConstants.DATABASE_KEY_DAYS;
+	public static final String KEY_MONTHS = DatabaseConstants.DATABASE_KEY_MONTHS;
+	public static final String KEY_YEARS = DatabaseConstants.DATABASE_KEY_YEARS;
 
-	private static final String DATABASE_NAME = Constants.DATABASE_NAME;
-	private static final String DATABASE_TABLE = Constants.DATABASE_TABLE;
-	private static final int DATABASE_VERSION = Constants.DATABASE_VERSION;
+	private static final String DATABASE_NAME = DatabaseConstants.DATABASE_NAME;
+	private static final String DATABASE_TABLE = DatabaseConstants.DATABASE_TABLE;
+	private static final int DATABASE_VERSION = DatabaseConstants.DATABASE_VERSION;
 
 	private DatabaseHelper _databaseHelper;
 	private final Context _context;
@@ -36,11 +36,8 @@ public class Database {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			db.execSQL(" CREATE TABLE " + DATABASE_TABLE + " ( " 
-					+ KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ KEY_NAMES + " TEXT NOT NULL, " 
-					+ KEY_DAYS + " TEXT NOT NULL, " 
-					+ KEY_MONTHS + " TEXT NOT NULL, "
+			db.execSQL(" CREATE TABLE " + DATABASE_TABLE + " ( " + KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ KEY_NAMES + " TEXT NOT NULL, " + KEY_DAYS + " TEXT NOT NULL, " + KEY_MONTHS + " TEXT NOT NULL, "
 					+ KEY_YEARS + " TEXT NOT NULL); ");
 		}
 
@@ -51,7 +48,7 @@ public class Database {
 		}
 
 		public void remove(Context context) {
-			context.deleteDatabase(Constants.DATABASE_NAME);
+			context.deleteDatabase(DatabaseConstants.DATABASE_NAME);
 		}
 	}
 
