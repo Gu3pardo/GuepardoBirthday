@@ -1,4 +1,4 @@
-package guepardoapps.guepardobirthdays.activities;
+package guepardoapps.guepardobirthday.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,10 +6,10 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import guepardoapps.guepardobirthday.R;
 import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.controller.*;
 import guepardoapps.guepardobirthday.model.Birthday;
-import guepardoapps.guepardobirthdays.R;
 
 import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.NavigationController;

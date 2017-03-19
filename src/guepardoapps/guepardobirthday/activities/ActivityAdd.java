@@ -1,4 +1,4 @@
-package guepardoapps.guepardobirthdays.activities;
+package guepardoapps.guepardobirthday.activities;
 
 import java.util.Calendar;
 
@@ -16,9 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import es.dmoral.toasty.Toasty;
+import guepardoapps.library.toastview.ToastView;
 
-import guepardoapps.guepardobirthdays.R;
+import guepardoapps.guepardobirthday.R;
 import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.controller.DatabaseController;
 import guepardoapps.guepardobirthday.model.Birthday;
@@ -52,26 +52,26 @@ public class ActivityAdd extends Activity {
 	private Runnable _trySaveNewBirthdayCallback = new Runnable() {
 		public void run() {
 			if (_name == null || _name.length() < 3) {
-				Toasty.error(_context, "Please enter a valid name!", Toast.LENGTH_SHORT).show();
+				ToastView.error(_context, "Please enter a valid name!", Toast.LENGTH_SHORT).show();
 				return;
 			}
 
 			if (_day == null || _month == null || _year == null || _day.length() < 1 || _month.length() < 1
 					|| _year.length() != 4) {
-				Toasty.error(_context, "Please select a valid date!", Toast.LENGTH_SHORT).show();
+				ToastView.error(_context, "Please select a valid date!", Toast.LENGTH_SHORT).show();
 				return;
 			}
 
 			if (Integer.parseInt(_year) < 1900 || Integer.parseInt(_year) > _today.get(Calendar.YEAR)) {
 				_yearEdit.setText("");
-				Toasty.error(_context, "Please select a valid year!", Toast.LENGTH_SHORT).show();
+				ToastView.error(_context, "Please select a valid year!", Toast.LENGTH_SHORT).show();
 				return;
 			}
 
 			_databaseController.CreateBirthday(
 					new Birthday(0, _name, Integer.parseInt(_day), Integer.parseInt(_month), Integer.parseInt(_year)));
 
-			Toasty.success(_context, "Saved new entry " + _name, Toast.LENGTH_LONG).show();
+			ToastView.success(_context, "Saved new entry " + _name, Toast.LENGTH_LONG).show();
 
 			finish();
 		}

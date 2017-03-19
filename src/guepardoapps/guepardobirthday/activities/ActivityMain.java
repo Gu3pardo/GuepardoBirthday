@@ -1,4 +1,4 @@
-package guepardoapps.guepardobirthdays.activities;
+package guepardoapps.guepardobirthday.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,10 +10,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import guepardoapps.guepardobirthday.R;
 import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.controller.DatabaseController;
 import guepardoapps.guepardobirthday.customadapter.BirthdayListAdapter;
-import guepardoapps.guepardobirthdays.R;
 
 import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.NavigationController;

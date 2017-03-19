@@ -8,10 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
+import guepardoapps.guepardobirthday.R;
+import guepardoapps.guepardobirthday.activities.ActivityMain;
 import guepardoapps.guepardobirthday.common.Bundles;
 import guepardoapps.guepardobirthday.common.Enables;
-import guepardoapps.guepardobirthdays.R;
-import guepardoapps.guepardobirthdays.activities.ActivityMain;
 
 import guepardoapps.toolset.common.Logger;
 

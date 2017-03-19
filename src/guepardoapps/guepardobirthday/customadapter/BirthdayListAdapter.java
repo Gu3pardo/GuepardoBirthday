@@ -16,14 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import es.dmoral.toasty.Toasty;
-
+import guepardoapps.guepardobirthday.R;
+import guepardoapps.guepardobirthday.activities.ActivityDetails;
 import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.model.Birthday;
-import guepardoapps.guepardobirthdays.R;
-import guepardoapps.guepardobirthdays.activities.ActivityDetails;
+import guepardoapps.library.particles.ParticleSystem;
 
-import guepardoapps.particles.ParticleSystem;
+import guepardoapps.library.toastview.ToastView;
 
 import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.NavigationController;
@@ -110,7 +109,7 @@ public class BirthdayListAdapter extends BaseAdapter {
 				_logger.Debug("_name onClick");
 
 				if (_birthdays.get(index).GetName().contains(ErrorConstants.NO_DATA_STRING)) {
-					Toasty.warning(_context, ErrorConstants.NO_DATA_TO_LOAD, Toast.LENGTH_SHORT).show();
+					ToastView.warning(_context, ErrorConstants.NO_DATA_TO_LOAD, Toast.LENGTH_SHORT).show();
 					return;
 				}
 

@@ -1,4 +1,4 @@
-package guepardoapps.guepardobirthdays.activities;
+package guepardoapps.guepardobirthday.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,8 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import guepardoapps.guepardobirthday.R;
 import guepardoapps.guepardobirthday.common.*;
-import guepardoapps.guepardobirthdays.R;
 
 import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.MailController;

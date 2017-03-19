@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="guepardoapps.guepardobirthdays"
-    android:versionCode="10002"
-    android:versionName="1.0.2.170313" >
+    package="guepardoapps.guepardobirthday"
+    android:versionCode="10003"
+    android:versionName="1.0.3.170319" >
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -18,10 +18,10 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name="guepardoapps.guepardobirthdays.activities.ActivityAdd" >
+        <activity android:name="guepardoapps.guepardobirthday.activities.ActivityAdd" >
         </activity>
         <activity
-            android:name="guepardoapps.guepardobirthdays.activities.ActivityBoot"
+            android:name="guepardoapps.guepardobirthday.activities.ActivityBoot"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,11 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="guepardoapps.guepardobirthdays.activities.ActivityDetails" >
+        <activity android:name="guepardoapps.guepardobirthday.activities.ActivityDetails" >
         </activity>
-        <activity android:name="guepardoapps.guepardobirthdays.activities.ActivityImpressum" >
+        <activity android:name="guepardoapps.guepardobirthday.activities.ActivityImpressum" >
         </activity>
-        <activity android:name="guepardoapps.guepardobirthdays.activities.ActivityMain" >
+        <activity android:name="guepardoapps.guepardobirthday.activities.ActivityMain" >
         </activity>
 
         <receiver android:name="guepardoapps.guepardobirthday.receiver.Receiver" >

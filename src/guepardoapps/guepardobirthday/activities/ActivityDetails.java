@@ -1,4 +1,4 @@
-package guepardoapps.guepardobirthdays.activities;
+package guepardoapps.guepardobirthday.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,12 +10,12 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import guepardoapps.guepardobirthday.R;
 import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.controller.DatabaseController;
 import guepardoapps.guepardobirthday.model.Birthday;
-import guepardoapps.guepardobirthdays.R;
 
-import guepardoapps.particles.ParticleSystem;
+import guepardoapps.library.particles.ParticleSystem;
 
 import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.DialogController;
