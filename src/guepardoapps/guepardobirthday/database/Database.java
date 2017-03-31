@@ -56,13 +56,13 @@ public class Database {
 		_context = context;
 	}
 
-	public Database open() throws SQLException {
+	public Database Open() throws SQLException {
 		_databaseHelper = new DatabaseHelper(_context);
 		_database = _databaseHelper.getWritableDatabase();
 		return this;
 	}
 
-	public void close() {
+	public void Close() {
 		_databaseHelper.close();
 	}
 
@@ -94,6 +94,8 @@ public class Database {
 			birthdayResult.add(new Birthday(cursor.getInt(idIndex), cursor.getString(nameIndex),
 					cursor.getInt(dayIndex), cursor.getInt(monthIndex), cursor.getInt(yearIndex)));
 		}
+
+		cursor.close();
 
 		return birthdayResult;
 	}

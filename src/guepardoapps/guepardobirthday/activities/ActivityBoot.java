@@ -11,9 +11,9 @@ import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.controller.*;
 import guepardoapps.guepardobirthday.model.Birthday;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.NavigationController;
-import guepardoapps.toolset.controller.SharedPrefController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.NavigationController;
+import guepardoapps.library.toolset.controller.SharedPrefController;
 
 public class ActivityBoot extends Activity {
 
@@ -39,7 +39,9 @@ public class ActivityBoot extends Activity {
 
 		_context = this;
 
-		_databaseController = new DatabaseController(_context);
+		_databaseController = DatabaseController.getInstance();
+		_databaseController.Initialize(_context);
+
 		_navigationController = new NavigationController(_context);
 		_sharedPrefController = new SharedPrefController(_context, SharedPrefConstants.SHARED_PREF_NAME);
 
@@ -53,9 +55,25 @@ public class ActivityBoot extends Activity {
 		_navigationController.NavigateTo(ActivityMain.class, true);
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		_logger.Debug("onPause");
+		_databaseController.Dispose();
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
-		_navigationController.NavigateTo(ActivityMain.class, true);
 		_logger.Debug("onResume");
+		_databaseController.Initialize(_context);
+		_navigationController.NavigateTo(ActivityMain.class, true);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_logger.Debug("onDestroy");
+		_databaseController.Dispose();
 	}
 }

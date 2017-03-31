@@ -17,8 +17,8 @@ import guepardoapps.guepardobirthday.model.Birthday;
 
 import guepardoapps.library.particles.ParticleSystem;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.DialogController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.DialogController;
 
 public class ActivityDetails extends Activity {
 
@@ -56,7 +56,9 @@ public class ActivityDetails extends Activity {
 
 		_context = this;
 
-		_databaseController = new DatabaseController(_context);
+		_databaseController = DatabaseController.getInstance();
+		_databaseController.Initialize(_context);
+
 		_dialogController = new DialogController(_context, getResources().getColor(R.color.TextIcon),
 				getResources().getColor(R.color.Primary));
 
@@ -104,5 +106,26 @@ public class ActivityDetails extends Activity {
 						_deleteEntryRunnable, "Cancel", _dialogController.CloseDialogCallback, true);
 			}
 		});
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		_logger.Debug("onPause");
+		_databaseController.Dispose();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		_logger.Debug("onResume");
+		_databaseController.Initialize(_context);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_logger.Debug("onDestroy");
+		_databaseController.Dispose();
 	}
 }

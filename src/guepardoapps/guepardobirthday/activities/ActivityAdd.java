@@ -16,15 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import guepardoapps.library.toastview.ToastView;
-
 import guepardoapps.guepardobirthday.R;
 import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.controller.DatabaseController;
 import guepardoapps.guepardobirthday.model.Birthday;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.DialogController;
+import guepardoapps.library.toastview.ToastView;
+
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.DialogController;
 
 public class ActivityAdd extends Activity {
 
@@ -95,7 +95,9 @@ public class ActivityAdd extends Activity {
 
 		_context = this;
 
-		_databaseController = new DatabaseController(_context);
+		_databaseController = DatabaseController.getInstance();
+		_databaseController.Initialize(_context);
+
 		_dialogController = new DialogController(_context, getResources().getColor(R.color.TextIcon),
 				getResources().getColor(R.color.Primary));
 
@@ -227,6 +229,27 @@ public class ActivityAdd extends Activity {
 				_trySaveNewBirthdayCallback.run();
 			}
 		});
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		_logger.Debug("onPause");
+		_databaseController.Dispose();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		_logger.Debug("onResume");
+		_databaseController.Initialize(_context);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_logger.Debug("onDestroy");
+		_databaseController.Dispose();
 	}
 
 	@Override

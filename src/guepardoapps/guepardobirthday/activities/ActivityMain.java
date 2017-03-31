@@ -15,8 +15,8 @@ import guepardoapps.guepardobirthday.common.*;
 import guepardoapps.guepardobirthday.controller.DatabaseController;
 import guepardoapps.guepardobirthday.customadapter.BirthdayListAdapter;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.NavigationController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.NavigationController;
 
 public class ActivityMain extends Activity {
 
@@ -43,7 +43,10 @@ public class ActivityMain extends Activity {
 		_logger.Debug("onCreate");
 
 		_context = this;
-		_databaseController = new DatabaseController(_context);
+
+		_databaseController = DatabaseController.getInstance();
+		_databaseController.Initialize(_context);
+
 		_navigationController = new NavigationController(_context);
 
 		_listView = (ListView) findViewById(R.id.listView);
@@ -71,14 +74,31 @@ public class ActivityMain extends Activity {
 		_created = true;
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		_logger.Debug("onPause");
+		_databaseController.Dispose();
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		_logger.Debug("onResume");
+
+		_databaseController.Initialize(_context);
 
 		if (_created) {
 			_listView.setAdapter(new BirthdayListAdapter(_context, _databaseController.GetBirthdays()));
 			_progressBar.setVisibility(View.GONE);
 			_listView.setVisibility(View.VISIBLE);
 		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_logger.Debug("onDestroy");
+		_databaseController.Dispose();
 	}
 }

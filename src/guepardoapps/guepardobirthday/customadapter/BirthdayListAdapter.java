@@ -24,8 +24,8 @@ import guepardoapps.library.particles.ParticleSystem;
 
 import guepardoapps.library.toastview.ToastView;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.NavigationController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.NavigationController;
 
 public class BirthdayListAdapter extends BaseAdapter {
 

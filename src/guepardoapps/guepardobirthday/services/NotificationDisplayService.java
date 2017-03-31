@@ -13,7 +13,7 @@ import guepardoapps.guepardobirthday.activities.ActivityMain;
 import guepardoapps.guepardobirthday.common.Bundles;
 import guepardoapps.guepardobirthday.common.Enables;
 
-import guepardoapps.toolset.common.Logger;
+import guepardoapps.library.toolset.common.Logger;
 
 public class NotificationDisplayService extends Service {
 

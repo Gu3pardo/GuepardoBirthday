@@ -12,7 +12,7 @@ import guepardoapps.guepardobirthday.controller.DatabaseController;
 import guepardoapps.guepardobirthday.model.Birthday;
 import guepardoapps.guepardobirthday.services.NotificationDisplayService;
 
-import guepardoapps.toolset.common.Logger;
+import guepardoapps.library.toolset.common.Logger;
 
 public class Receiver extends BroadcastReceiver {
 
@@ -36,7 +36,8 @@ public class Receiver extends BroadcastReceiver {
 		_logger.Debug("Receiver onReceive");
 
 		_context = context;
-		_databaseController = new DatabaseController(_context);
+		_databaseController = DatabaseController.getInstance();
+		_databaseController.Initialize(_context);
 
 		_birthdays = _databaseController.GetBirthdays();
 
@@ -64,5 +65,7 @@ public class Receiver extends BroadcastReceiver {
 				_context.startService(notificationIntent);
 			}
 		}
+
+		_databaseController.Dispose();
 	}
 }
