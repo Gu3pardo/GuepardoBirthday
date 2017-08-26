@@ -1,0 +1,39 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="guepardoapps.whosbirthday">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="guepardoapps.whosbirthday.activities.ActivityAdd" />
+        <activity
+            android:name="guepardoapps.whosbirthday.activities.ActivityBoot"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="guepardoapps.whosbirthday.activities.ActivityDetails" />
+        <activity android:name="guepardoapps.whosbirthday.activities.ActivityImpressum" />
+        <activity android:name="guepardoapps.whosbirthday.activities.ActivityMain" />
+
+        <receiver android:name="guepardoapps.whosbirthday.receiver.Receiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.wifi.supplicant.CONNECTION_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGE" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="guepardoapps.whosbirthday.services.NotificationDisplayService"
+            android:enabled="true" />
+    </application>
+
+</manifest>

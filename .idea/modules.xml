@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Who'sBirthday.iml" filepath="$PROJECT_DIR$/Who'sBirthday.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Toolset/lib_toolset/lib_toolset.iml" filepath="$PROJECT_DIR$/../Toolset/lib_toolset/lib_toolset.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
+    </modules>
+  </component>
+</project>
