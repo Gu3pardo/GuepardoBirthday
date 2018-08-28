@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Who\'s Birthday</string>
+    <string name="copyright">©2018 GuepardoApps (Jonas Schubert)</string>
 
     <string name="create">Create</string>
     <string name="edit"> Edit </string>
     <string name="delete">Delete</string>
     <string name="send">Send</string>
-    <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="add">Add</string>
     <string name="addPlus">+</string>
@@ -17,12 +17,15 @@
     <string name="prompt">Prompt</string>
     <string name="ok">OK</string>
     <string name="neutral">Neutral</string>
+    <string name="cancel">Cancel</string>
 
     <string name="birthday">Birthday</string>
     <string name="hint_name_birthday">Enter a name</string>
+    <string name="hint_group_birthday">Enter a group</string>
     <string name="hint_day_birthday">Enter a day</string>
     <string name="hint_month_birthday">Enter a month</string>
     <string name="hint_year_birthday">Enter a year</string>
+    <string name="hint_remind_me_birthday">Remind me about this birthday</string>
 
     <string name="hint">Enter your notes, please!</string>
     <string name="example">Example</string>
@@ -33,8 +36,16 @@
     <string name="error_field_required">This field is required</string>
 
     <string name="about">About</string>
-    <string name="impressum">Impressum</string>
+    <string name="author_title">Author</string>
     <string name="author">Jonas Schubert\nGuepardoApps</string>
-    <string name="email">E-Mail: guepardoapps@gmail.com</string>
+    <string name="version_title">Version</string>
+    <string name="version">1.1.0.180828</string>
+    <string name="email_title">EMail</string>
+    <string name="email">guepardoapps@gmail.com</string>
+    <string name="gitHubLink_title">GitHub</string>
     <string name="gitHubLink">https://github.com/GuepardoApps/WhosBirthday/</string>
+    <string name="homepageLink_title">Homepage</string>
+    <string name="homepageLink">https://guepardoapps.github.io/</string>
+    <string name="payPalLink_title">PayPal</string>
+    <string name="payPalLink">https://www.paypal.me/GuepardoApps/</string>
 </resources>

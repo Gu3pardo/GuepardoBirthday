@@ -20,7 +20,7 @@
             android:padding="5dp">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/birthday_TextInputLayout"
+                android:id="@+id/birthday_NameInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -28,7 +28,28 @@
                 android:layout_alignParentTop="true">
 
                 <AutoCompleteTextView
-                    android:id="@+id/birthday_edit_textview"
+                    android:id="@+id/birthday_name_edit_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_birthday_name"
+                    android:inputType="textAutoComplete"
+                    android:maxLines="1"
+                    android:nextFocusDown="@+id/birthday_edit_datePicker"
+                    android:nextFocusRight="@+id/birthday_edit_datePicker"
+                    android:textColor="#FFFFFF" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/birthday_GroupInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true">
+
+                <AutoCompleteTextView
+                    android:id="@+id/birthday_group_edit_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_birthday_name"

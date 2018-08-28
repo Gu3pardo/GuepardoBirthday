@@ -19,7 +19,7 @@
                 android:id="@+id/farmListFrame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/btnImpressum">
+                android:layout_above="@+id/btnAbout">
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -35,17 +35,17 @@
             </FrameLayout>
 
             <Button
-                android:id="@+id/btnImpressum"
+                android:id="@+id/btnAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:background="@xml/button"
-                android:text="@string/impressum"
+                android:text="@string/about"
                 android:textColor="@color/TextIcon" />
 
             <Button
-                android:id="@+id/goToAddView"
+                android:id="@+id/btnAdd"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
