@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 
-class NavigationController(val context: Context) : INavigationController {
+internal class NavigationController(val context: Context) : INavigationController {
     override fun navigate(activity: Class<*>, finish: Boolean) {
         context.startActivity(Intent(context, activity))
         if (finish) {

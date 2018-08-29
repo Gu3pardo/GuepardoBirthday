@@ -14,7 +14,7 @@ import android.support.annotation.NonNull
 import guepardoapps.whosbirthday.extensions.common.circleBitmap
 import guepardoapps.whosbirthday.model.NotificationContent
 
-class NotificationController(@NonNull private val context: Context) : INotificationController {
+internal class NotificationController(@NonNull private val context: Context) : INotificationController {
 
     private val channelId: String = "guepardoapps.whosbirthday"
     private val channelName: String = "WhosBirthday"

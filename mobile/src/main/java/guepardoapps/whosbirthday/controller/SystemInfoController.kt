@@ -18,7 +18,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityManager
 import guepardoapps.whosbirthday.utils.Logger
 
-class SystemInfoController(@NonNull private val context: Context) : ISystemInfoController {
+internal class SystemInfoController(@NonNull private val context: Context) : ISystemInfoController {
     private val tag: String = SystemInfoController::class.java.simpleName
 
     private val minScreenOffTimeoutMs = 5 * 1000

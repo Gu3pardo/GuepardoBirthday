@@ -3,7 +3,7 @@ package guepardoapps.whosbirthday.controller
 import android.content.Context
 import android.content.Intent
 
-class MailController(val context: Context) : IMailController {
+internal class MailController(val context: Context) : IMailController {
     override fun sendMail(subject: String, text: String, addresses: ArrayList<String>, startNewActivity: Boolean) {
         val mailIntent = Intent(Intent.ACTION_SEND)
 

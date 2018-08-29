@@ -6,7 +6,7 @@
 <a target="_blank" href="https://www.paypal.me/GuepardoApps" title="Donate using PayPal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg" /></a>
 
 [![Build](https://img.shields.io/badge/build-passing-green.svg)](https://github.com/GuepardoApps/WhosBirthday/tree/develop/publish)
-[![Version](https://img.shields.io/badge/version-v1.1.0.180828-blue.svg)](https://github.com/GuepardoApps/WhosBirthday/tree/develop/publish/v1.1.0.180828.apk)
+[![Version](https://img.shields.io/badge/version-v1.1.0.180829-blue.svg)](https://github.com/GuepardoApps/WhosBirthday/tree/develop/publish/v1.1.0.180829.apk)
 
 Android application for saving birthdays and getting remembered
 

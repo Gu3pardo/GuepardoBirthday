@@ -2,7 +2,7 @@ package guepardoapps.whosbirthday.model
 
 import java.util.*
 
-data class Birthday(val id: Long, var name: String, var group: String, var day: Int, var month: Int, var year: Int, var remindMe: Boolean) {
+internal data class Birthday(val id: Long, var name: String, var group: String, var day: Int, var month: Int, var year: Int, var remindMe: Boolean, var remindedMe: Boolean) {
     fun getAge(): Int {
         if (Calendar.getInstance().get(Calendar.MONTH) + 1 >= month) {
             if (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) >= day) {

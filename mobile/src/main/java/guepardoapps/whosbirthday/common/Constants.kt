@@ -1,6 +1,6 @@
 package guepardoapps.whosbirthday.common
 
-class Constants {
+internal class Constants {
     companion object {
         const val systemPermissionId = 23532
 

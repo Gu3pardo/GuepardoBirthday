@@ -4,7 +4,7 @@ import android.content.ContentResolver
 import android.content.pm.ApplicationInfo
 import android.view.Display
 
-interface ISystemInfoController {
+internal interface ISystemInfoController {
     fun getApkList(): List<ApplicationInfo>
     fun getApkPackageNameList(): List<String>
     fun isPackageInstalled(packageName: String): Boolean

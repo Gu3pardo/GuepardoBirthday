@@ -17,7 +17,6 @@
         <activity
             android:name=".activities.ActivityAbout"
             android:theme="@style/AppTheme.MaterialAboutActivity" />
-        <activity android:name=".activities.ActivityAdd" />
         <activity
             android:name=".activities.ActivityBoot"
             android:label="@string/app_name">
@@ -27,8 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ActivityDetails" />
+        <activity android:name=".activities.ActivityEdit" />
         <activity android:name=".activities.ActivityMain" />
+        <activity android:name=".activities.ActivitySettings" />
 
         <receiver android:name=".receiver.WakeUpReceiver">
             <intent-filter>
@@ -38,6 +38,9 @@
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </receiver>
-    </application>
 
+        <service
+            android:name=".services.FloatingService"
+            android:enabled="true" />
+    </application>
 </manifest>

@@ -5,7 +5,7 @@ import com.andreacioccarelli.cryptoprefs.CryptoPrefs
 import guepardoapps.whosbirthday.common.Constants
 import guepardoapps.whosbirthday.utils.Logger
 
-class SharedPreferenceController(context: Context) : ISharedPreferenceController {
+internal class SharedPreferenceController(context: Context) : ISharedPreferenceController {
     private val tag: String = SharedPreferenceController::class.java.simpleName
 
     private val cryptoPrefs: CryptoPrefs = CryptoPrefs(context, Constants.sharedPrefName, Constants.sharedPrefKey)

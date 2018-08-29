@@ -13,7 +13,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 10100
-        versionName "1.1.0.180828"
+        versionName "1.1.0.180829"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
@@ -57,6 +57,11 @@ dependencies {
     implementation "com.android.support:support-annotations:$android_support_version"
     implementation "com.android.support:support-compat:$android_support_version"
     implementation "com.android.support:support-v4:$android_support_version"
+    implementation "com.android.support:support-v13:$android_support_version"
+
+    implementation("com.afollestad.material-dialogs:core:$materialdialog_version") {
+        exclude group: 'com.android.support'
+    }
 
     implementation "com.evernote:android-state:$androidstate_version"
     // Java only project
@@ -68,7 +73,13 @@ dependencies {
     implementation "com.github.daniel-stoneuk:material-about-library:$materialabout_version"
     implementation "com.github.rey5137:material:$rey_material_version"
 
+    implementation "it.sephiroth.android.library.bottomnavigation:bottom-navigation:$bottomnavigation_version"
+
     implementation "com.plattysoft.leonids:LeonidsLib:$leonids_version"
+
+    implementation("com.wdullaer:materialdatetimepicker:$materialdatetimepicker_version") {
+        exclude group: 'com.android.support'
+    }
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

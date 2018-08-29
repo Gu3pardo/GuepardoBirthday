@@ -13,7 +13,7 @@ import guepardoapps.whosbirthday.model.Birthday
 
 class ActivityBoot : Activity() {
 
-    private val delayInMillis: Long = 1500
+    private val delayInMillis: Long = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class ActivityBoot : Activity() {
             sharedPreferenceController.save(Constants.bubblePosY, Constants.bubbleDefaultPosY)
             sharedPreferenceController.save(Constants.sharedPrefName, true)
 
-            DbBirthday(this).add(Birthday(0, "Jonas Schubert", "Friends", 2, 1, 1990, true))
+            DbBirthday(this).add(Birthday(0, "Jonas Schubert", "Friends", 2, 1, 1990, true, false))
         }
     }
 
