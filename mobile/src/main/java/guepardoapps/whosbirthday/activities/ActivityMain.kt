@@ -8,13 +8,14 @@ import guepardoapps.whosbirthday.controller.NavigationController
 import guepardoapps.whosbirthday.customadapter.BirthdayListAdapter
 import guepardoapps.whosbirthday.database.birthday.DbBirthday
 import guepardoapps.whosbirthday.enum.DbBirthdayAction
-import guepardoapps.whosbirthday.publishsubject.DbBirthdayActionPublishSubject
+import guepardoapps.whosbirthday.model.DbBirthdayActionPublishSubject
 import guepardoapps.whosbirthday.utils.Logger
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation
 import kotlinx.android.synthetic.main.side_main.*
 
+@ExperimentalUnsignedTypes
 class ActivityMain : Activity(), BottomNavigation.OnMenuItemSelectionListener {
     private val tag: String = ActivityMain::class.java.simpleName
 
@@ -35,7 +36,7 @@ class ActivityMain : Activity(), BottomNavigation.OnMenuItemSelectionListener {
                                 else -> Logger.instance.verbose(tag, "No action needed for dbBirthdayAction $dbBirthdayAction")
                             }
                         },
-                        { _ -> }
+                        { }
                 )
     }
 

@@ -9,6 +9,7 @@ import guepardoapps.whosbirthday.controller.SharedPreferenceController
 import guepardoapps.whosbirthday.controller.SystemInfoController
 import kotlinx.android.synthetic.main.side_settings.*
 
+@ExperimentalUnsignedTypes
 class ActivitySettings : Activity() {
     private lateinit var sharedPreferenceController: SharedPreferenceController
     private lateinit var systemInfoController: SystemInfoController
@@ -20,7 +21,7 @@ class ActivitySettings : Activity() {
         sharedPreferenceController = SharedPreferenceController(this)
         systemInfoController = SystemInfoController(this)
 
-        switchBubbleState.isChecked = sharedPreferenceController.load(Constants.bubbleState, false) as Boolean
+        switchBubbleState.isChecked = sharedPreferenceController.load(Constants.bubbleState, false)
         switchBubbleState.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferenceController.save(Constants.bubbleState, isChecked)
             if (isChecked) {
@@ -37,7 +38,7 @@ class ActivitySettings : Activity() {
 
     override fun onResume() {
         super.onResume()
-        if ((sharedPreferenceController.load(Constants.bubbleState, false) as Boolean)
+        if ((sharedPreferenceController.load(Constants.bubbleState, false))
                 && systemInfoController.canDrawOverlay()) {
             BirthdayController().checkForBirthday(this)
         }

@@ -12,8 +12,6 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
-import com.evernote.android.state.State
-import com.evernote.android.state.StateSaver
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import guepardoapps.whosbirthday.R
 import guepardoapps.whosbirthday.common.Constants
@@ -24,26 +22,22 @@ import guepardoapps.whosbirthday.model.Birthday
 import kotlinx.android.synthetic.main.side_add.*
 import java.util.*
 
+@ExperimentalUnsignedTypes
 @SuppressLint("SetTextI18n")
 class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var saveButton: Button
 
-    @State
     private var year: Int = 1970
 
-    @State
     private var month: Int = 0
 
-    @State
     private var dayOfMonth: Int = 1
 
-    @State
     private var birthday: Birthday? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        StateSaver.restoreInstanceState(this, savedInstanceState)
 
         setContentView(R.layout.side_add)
 
@@ -139,11 +133,6 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        StateSaver.saveInstanceState(this, outState)
-    }
-
     override fun onDateSet(view: DatePickerDialog?, year: Int, month: Int, dayOfMonth: Int) {
         this.year = year
         this.month = month
@@ -152,6 +141,7 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
         birthday_DatePickerEditText.setText("${this.dayOfMonth.integerFormat(2)}.${(this.month + 1).integerFormat(2)}.${this.year.integerFormat(4)}")
     }
 
+    @Suppress("DEPRECATION")
     private fun showDatePickerDialog(showedDialog: Boolean, context: ActivityEdit): Boolean {
         return if (!showedDialog) {
             val datePickerDialog: DatePickerDialog = DatePickerDialog.newInstance(

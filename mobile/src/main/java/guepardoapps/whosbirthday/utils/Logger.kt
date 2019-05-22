@@ -1,7 +1,7 @@
 package guepardoapps.whosbirthday.utils
 
 import android.content.Context
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import android.util.Log
 import guepardoapps.whosbirthday.database.logging.DbLogging
 import guepardoapps.whosbirthday.database.logging.DbLog

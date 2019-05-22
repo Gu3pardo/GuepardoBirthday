@@ -1,7 +1,6 @@
 package guepardoapps.whosbirthday
 
 import android.app.Application
-import com.evernote.android.state.StateSaver
 import guepardoapps.whosbirthday.utils.Logger
 
 class WhosBirthdayApp : Application() {
@@ -12,7 +11,5 @@ class WhosBirthdayApp : Application() {
 
         Logger.instance.initialize(this)
         Logger.instance.debug(tag, "onCreate")
-
-        StateSaver.setEnabledForAllActivitiesAndSupportFragments(this, true)
     }
 }

@@ -8,7 +8,7 @@ import guepardoapps.whosbirthday.enum.DbBirthdayAction
 import guepardoapps.whosbirthday.extensions.common.toBoolean
 import guepardoapps.whosbirthday.extensions.common.toInteger
 import guepardoapps.whosbirthday.model.Birthday
-import guepardoapps.whosbirthday.publishsubject.DbBirthdayActionPublishSubject
+import guepardoapps.whosbirthday.model.DbBirthdayActionPublishSubject
 
 // Helpful
 // https://developer.android.com/training/data-storage/sqlite
