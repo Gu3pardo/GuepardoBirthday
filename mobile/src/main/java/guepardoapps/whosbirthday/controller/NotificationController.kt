@@ -10,7 +10,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import guepardoapps.whosbirthday.extensions.common.circleBitmap
 import guepardoapps.whosbirthday.model.NotificationContent
 

@@ -4,6 +4,6 @@
 	- [ ] add name if only one birthday is today
 	- [ ] add picture of contact if available and only one birthday detected
 - [ ] improve check of birthdays using schedule instead or additional to BroadcastReceiver
-- [ ] update libraries
+- [x] update libraries
 - [ ] fix layout context
 - [ ] fix nextFocus in edit view

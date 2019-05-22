@@ -1,5 +1,3 @@
 package guepardoapps.whosbirthday.extensions.common
 
-fun Char.div(divider: Int): Char {
-    return (this.toInt() / divider).toChar()
-}
+fun Char.div(divider: Int): Char = (this.toInt() / divider).toChar()

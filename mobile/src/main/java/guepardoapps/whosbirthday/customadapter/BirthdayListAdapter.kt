@@ -20,6 +20,7 @@ import guepardoapps.whosbirthday.database.birthday.DbBirthday
 import guepardoapps.whosbirthday.extensions.common.integerFormat
 import guepardoapps.whosbirthday.model.Birthday
 
+@ExperimentalUnsignedTypes
 internal class BirthdayListAdapter(private val context: Context, private val list: Array<Birthday>) : BaseAdapter() {
 
     private val navigationController: NavigationController = NavigationController(context)
@@ -88,7 +89,7 @@ internal class BirthdayListAdapter(private val context: Context, private val lis
             MaterialDialog(context).show {
                 title(text = "Delete")
                 message(text = "Delete ${birthday.name}?")
-                positiveButton(text = "Yes") { _ -> DbBirthday(context).delete(birthday.id.toInt()) }
+                positiveButton(text = "Yes") { DbBirthday(context).delete(birthday.id.toInt()) }
                 negativeButton(text = "No")
             }
         }

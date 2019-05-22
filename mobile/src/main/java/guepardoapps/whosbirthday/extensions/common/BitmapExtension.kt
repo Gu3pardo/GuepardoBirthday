@@ -3,14 +3,6 @@ package guepardoapps.whosbirthday.extensions.common
 import android.graphics.*
 
 /**
- * @param color the color set for the bitmap
- * @return returns a rounded bitmap
- */
-fun Bitmap.circleBitmap(color: Int): Bitmap {
-    return this.circleBitmap(this.height, this.width, color)
-}
-
-/**
  * @param height the height set for the bitmap
  * @param width the width set for the bitmap
  * @param color the color set for the bitmap

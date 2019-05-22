@@ -10,6 +10,7 @@ import guepardoapps.whosbirthday.extensions.common.integerFormat
 import guepardoapps.whosbirthday.model.NotificationContent
 import guepardoapps.whosbirthday.services.FloatingService
 
+@ExperimentalUnsignedTypes
 internal class BirthdayController : IBirthdayController {
     override fun checkForBirthday(context: Context) {
         DbBirthday(context).get().forEach { birthday ->
@@ -29,7 +30,7 @@ internal class BirthdayController : IBirthdayController {
                 NotificationController(context).create(notificationContent)
 
                 // TODO show bubble starting service
-                if ((SharedPreferenceController(context).load(Constants.bubbleState, false) as Boolean)) {
+                if ((SharedPreferenceController(context).load(Constants.bubbleState, false))) {
                     context.startService(Intent(context, FloatingService::class.java))
                 }
 
