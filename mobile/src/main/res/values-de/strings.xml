@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Who\'s Birthday</string>
+    <string name="copyright">©2017 &#8211; 2019 GuepardoApps (Jonas Schubert)</string>
+
+    <string name="create">Erstelle</string>
+    <string name="edit">Bearbeite</string>
+    <string name="delete">Löschen</string>
+    <string name="send">Senden</string>
+    <string name="save">Speichern</string>
+    <string name="add">Hinzufügen</string>
+    <string name="addPlus">+</string>
+    <string name="back">Zurück</string>
+    <string name="set_bubble_state">Aktiviere floating Benachrichtigung</string>
+    <string name="settings">Einstellungen</string>
+
+    <string name="title">Titel</string>
+    <string name="content">Inhalt</string>
+
+    <string name="prompt">Aufforderung</string>
+    <string name="ok">Ok</string>
+    <string name="neutral">Neutral</string>
+    <string name="cancel">Abbrechen</string>
+
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+
+    <string name="birthday">Geburtstag</string>
+    <string name="hint_name_birthday">Namen eingeben</string>
+    <string name="hint_group_birthday">Gruppe eingeben</string>
+    <string name="hint_day_birthday">Tag eingeben</string>
+    <string name="hint_month_birthday">Monat eingeben</string>
+    <string name="hint_year_birthday">Jahr eingeben</string>
+    <string name="hint_remind_me_birthday">Benachrichtige mich über diesen Geburtstag</string>
+    <string name="hint_date_birthday">Wähle das Datum</string>
+
+    <string name="example">Beispiel</string>
+
+    <string name="contentDescription">Dies ist ein Bild</string>
+
+    <string name="prompt_birthday_name">Name des Geburtstags</string>
+    <string name="prompt_birthday_group">Gruppes des Geburtstags</string>
+    <string name="error_field_required">Dieses Feld ist erforderlich</string>
+
+    <string name="about">Über</string>
+    <string name="author_title">Autor</string>
+    <string name="author">Jonas Schubert\nGuepardoApps</string>
+    <string name="version_title">Version</string>
+    <string name="version">1.1.2.190525</string>
+    <string name="email_title">E-Mail</string>
+    <string name="email">guepardoapps@gmail.com</string>
+    <string name="gitHubLink_title">GitHub</string>
+    <string name="gitHubLink">https://github.com/GuepardoApps-Releases/WhosBirthday/</string>
+    <string name="homepageLink_title">Homepage</string>
+    <string name="homepageLink">https://guepardoapps.github.io/</string>
+
+    <string name="friends">Freunde</string>
+
+    <string name="notificationTitle">Who\'s birthday</string>
+    <string name="notificationContent">"Es ist %s' %d Geburtstag!"</string>
+
+    <string name="deleteRequest">Willst du den Geburtstag von %s wirklich löschen?</string>
+</resources>

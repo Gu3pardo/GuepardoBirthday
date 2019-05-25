@@ -1,11 +1,10 @@
-
 # Who's Birthday
 
 [![PlayStore](https://img.shields.io/badge/PlayStore-WhosBirthday-blue.svg)](https://play.google.com/store/apps/details?id=guepardoapps.whosbirthday)
 [![Paypal](https://img.shields.io/badge/paypal-donate-blue.svg)](https://www.paypal.me/GuepardoApps)
 
 [![Build](https://img.shields.io/badge/build-success-green.svg)](./releases)
-[![Version](https://img.shields.io/badge/version-1.1.1.190522-blue.svg)](./releases)
+[![Version](https://img.shields.io/badge/version-1.1.2.190525-blue.svg)](./releases)
 [![API](https://img.shields.io/badge/API-23+-blue.svg)](https://android-arsenal.com/api?level=23)
 
 [![Platform](https://img.shields.io/badge/platform-Android-blue.svg)](https://www.android.com)
@@ -14,7 +13,7 @@
 
 Android application for saving birthdays and getting remembered
 
-# Screenshots
+## Screenshots
 
 ![alt tag](screenshots/header_001.png)
 ___________________________________

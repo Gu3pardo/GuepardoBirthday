@@ -11,7 +11,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import androidx.annotation.NonNull
-import guepardoapps.whosbirthday.extensions.common.circleBitmap
+import guepardoapps.whosbirthday.extensions.circleBitmap
 import guepardoapps.whosbirthday.model.NotificationContent
 
 internal class NotificationController(@NonNull private val context: Context) : INotificationController {

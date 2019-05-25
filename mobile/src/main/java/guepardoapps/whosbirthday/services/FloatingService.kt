@@ -16,7 +16,6 @@ import android.view.WindowManager
 import android.widget.ImageView
 import guepardoapps.whosbirthday.R
 import guepardoapps.whosbirthday.activities.ActivityMain
-import guepardoapps.whosbirthday.common.Constants
 import guepardoapps.whosbirthday.controller.SharedPreferenceController
 import guepardoapps.whosbirthday.controller.SystemInfoController
 import guepardoapps.whosbirthday.utils.Logger
@@ -36,9 +35,7 @@ class FloatingService : Service() {
     private var bubblePosY: Int = 100
     private var bubbleMoved: Boolean = false
 
-    override fun onBind(intent: Intent?): IBinder? {
-        return null
-    }
+    override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -64,8 +61,8 @@ class FloatingService : Service() {
     private fun initBubbleView() {
         val sharedPreferenceController = SharedPreferenceController(this)
 
-        bubblePosX = sharedPreferenceController.load(Constants.bubblePosX, Constants.bubbleDefaultPosX)
-        bubblePosY = sharedPreferenceController.load(Constants.bubblePosY, Constants.bubbleDefaultPosY)
+        bubblePosX = sharedPreferenceController.load(getString(R.string.sharedPrefBubblePosX), resources.getInteger(R.integer.sharedPrefBubbleDefaultPosX))
+        bubblePosY = sharedPreferenceController.load(getString(R.string.sharedPrefBubblePosY), resources.getInteger(R.integer.sharedPrefBubbleDefaultPosY))
 
         val params = WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
@@ -122,10 +119,11 @@ class FloatingService : Service() {
                         params.x = initialX + (event.rawX - initialTouchX).toInt()
                         params.y = initialY + (event.rawY - initialTouchY).toInt()
 
-                        if (initialX - params.x > 25
-                                || initialY - params.y > 25
-                                || params.x - initialX > 25
-                                || params.y - initialY > 25) {
+                        val minMovement = resources.getInteger(R.integer.bubbleMinMove)
+                        if (initialX - params.x > minMovement
+                                || initialY - params.y > minMovement
+                                || params.x - initialX > minMovement
+                                || params.y - initialY > minMovement) {
                             bubbleMoved = true
                         }
 
@@ -152,8 +150,8 @@ class FloatingService : Service() {
                 bubblePosX = params.x
                 bubblePosY = params.y
 
-                sharedPreferenceController.save(Constants.bubblePosX, bubblePosX)
-                sharedPreferenceController.save(Constants.bubblePosY, bubblePosY)
+                sharedPreferenceController.save(getString(R.string.sharedPrefBubblePosX), bubblePosX)
+                sharedPreferenceController.save(getString(R.string.sharedPrefBubblePosY), bubblePosY)
 
                 bubbleParamsStore = params
                 windowManager.updateViewLayout(bubbleView, bubbleParamsStore)

@@ -6,7 +6,6 @@ import android.os.Handler
 import com.github.guepardoapps.timext.kotlin.extensions.milliseconds
 import com.github.guepardoapps.timext.kotlin.postDelayed
 import guepardoapps.whosbirthday.R
-import guepardoapps.whosbirthday.common.Constants
 import guepardoapps.whosbirthday.controller.NavigationController
 import guepardoapps.whosbirthday.controller.SharedPreferenceController
 import guepardoapps.whosbirthday.controller.SystemInfoController
@@ -22,15 +21,20 @@ class ActivityBoot : Activity() {
 
         val sharedPreferenceController = SharedPreferenceController(this)
 
-        if (!sharedPreferenceController.load(Constants.sharedPrefName, false)) {
+        if (!sharedPreferenceController.load(getString(R.string.sharedPrefName), false)) {
             sharedPreferenceController.run {
-                save(Constants.bubbleState, true)
-                save(Constants.bubblePosX, Constants.bubbleDefaultPosX)
-                save(Constants.bubblePosY, Constants.bubbleDefaultPosY)
-                save(Constants.sharedPrefName, true)
+                save(getString(R.string.sharedPrefBubbleState), true)
+                save(getString(R.string.sharedPrefBubblePosX), resources.getInteger(R.integer.sharedPrefBubbleDefaultPosX))
+                save(getString(R.string.sharedPrefBubblePosY), resources.getInteger(R.integer.sharedPrefBubbleDefaultPosY))
+                save(getString(R.string.sharedPrefName), true)
             }
 
-            DbBirthday(this).add(Birthday(0, "Jonas Schubert", "Friends", 2, 1, 1990, true, false))
+            DbBirthday(this)
+                    .add(Birthday(
+                            id = 0,
+                            name = "Jonas Schubert", group = getString(R.string.friends),
+                            day = 2, month = 1, year = 1990,
+                            remindMe = true, remindedMe = false))
         }
     }
 
@@ -41,7 +45,7 @@ class ActivityBoot : Activity() {
         val systemInfoController = SystemInfoController(this)
 
         if (systemInfoController.currentAndroidApi() >= android.os.Build.VERSION_CODES.M) {
-            if (systemInfoController.checkAPI23SystemPermission(Constants.systemPermissionId)) {
+            if (systemInfoController.checkAPI23SystemPermission(resources.getInteger(R.integer.systemPermissionId))) {
                 Handler().postDelayed({ navigationController.navigate(ActivityMain::class.java, true) }, resources.getInteger(R.integer.bootNavigationDelayInMs).milliseconds)
             }
         } else {

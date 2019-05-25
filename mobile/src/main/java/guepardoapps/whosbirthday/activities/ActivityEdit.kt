@@ -14,10 +14,9 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import guepardoapps.whosbirthday.R
-import guepardoapps.whosbirthday.common.Constants
 import guepardoapps.whosbirthday.controller.BirthdayController
 import guepardoapps.whosbirthday.database.birthday.DbBirthday
-import guepardoapps.whosbirthday.extensions.common.integerFormat
+import guepardoapps.whosbirthday.extensions.integerFormat
 import guepardoapps.whosbirthday.model.Birthday
 import kotlinx.android.synthetic.main.side_add.*
 import java.util.*
@@ -29,11 +28,8 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
     private lateinit var saveButton: Button
 
     private var year: Int = 1970
-
     private var month: Int = 0
-
     private var dayOfMonth: Int = 1
-
     private var birthday: Birthday? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +65,7 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
 
         val data = intent.extras
         if (data != null) {
-            val id = data.getLong(Constants.bundleDataId)
+            val id = data.getLong(getString(R.string.bundleDataId))
             birthday = DbBirthday(this).findById(id).firstOrNull()
             if (birthday != null) {
                 birthday_name_edit_textview.setText(birthday?.name)
@@ -78,7 +74,8 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
                 year = birthday?.year!!
                 month = birthday?.month!!
                 dayOfMonth = birthday?.day!!
-                birthday_DatePickerEditText.setText("${this.dayOfMonth.integerFormat(2)}.${(this.month + 1).integerFormat(2)}.${this.year.integerFormat(4)}")
+                birthday_DatePickerEditText
+                        .setText("${this.dayOfMonth.integerFormat(2)}.${(this.month + 1).integerFormat(2)}.${this.year.integerFormat(4)}")
             }
         }
 
@@ -123,9 +120,19 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
                 focusView?.requestFocus()
             } else {
                 if (birthday != null) {
-                    DbBirthday(this).update(Birthday(birthday?.id!!, name, group, dayOfMonth, month + 1, year, birthday?.remindMe!!, birthday?.remindedMe!!))
+                    DbBirthday(this)
+                            .update(Birthday(
+                                    id = birthday?.id!!,
+                                    name = name, group = group,
+                                    day = dayOfMonth, month = month + 1, year = year,
+                                    remindMe = birthday?.remindMe!!, remindedMe = birthday?.remindedMe!!))
                 } else {
-                    DbBirthday(this).add(Birthday(0, name, group, dayOfMonth, month + 1, year, true, false))
+                    DbBirthday(this)
+                            .add(Birthday(
+                                    id = 0,
+                                    name = name, group = group,
+                                    day = dayOfMonth, month = month + 1, year = year,
+                                    remindMe = true, remindedMe = false))
                 }
                 BirthdayController().checkForBirthday(this)
                 finish()
@@ -138,7 +145,8 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
         this.month = month
         this.dayOfMonth = dayOfMonth
 
-        birthday_DatePickerEditText.setText("${this.dayOfMonth.integerFormat(2)}.${(this.month + 1).integerFormat(2)}.${this.year.integerFormat(4)}")
+        birthday_DatePickerEditText
+                .setText("${this.dayOfMonth.integerFormat(2)}.${(this.month + 1).integerFormat(2)}.${this.year.integerFormat(4)}")
     }
 
     @Suppress("DEPRECATION")

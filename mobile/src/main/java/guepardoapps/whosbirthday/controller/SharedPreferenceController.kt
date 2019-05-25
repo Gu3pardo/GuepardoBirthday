@@ -2,13 +2,13 @@ package guepardoapps.whosbirthday.controller
 
 import android.content.Context
 import com.andreacioccarelli.cryptoprefs.CryptoPrefs
-import guepardoapps.whosbirthday.common.Constants
+import guepardoapps.whosbirthday.R
 import guepardoapps.whosbirthday.utils.Logger
 
 internal class SharedPreferenceController(context: Context) : ISharedPreferenceController {
     private val tag: String = SharedPreferenceController::class.java.simpleName
 
-    private val cryptoPrefs: CryptoPrefs = CryptoPrefs(context, Constants.sharedPrefName, Constants.sharedPrefKey)
+    private val cryptoPrefs: CryptoPrefs = CryptoPrefs(context, context.getString(R.string.sharedPrefName), context.getString(R.string.sharedPrefKey))
 
     @ExperimentalUnsignedTypes
     override fun <T : Any> save(key: String, value: T) {

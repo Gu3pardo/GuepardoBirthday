@@ -13,11 +13,9 @@ import com.plattysoft.leonids.ParticleSystem
 import com.rey.material.widget.FloatingActionButton
 import guepardoapps.whosbirthday.R
 import guepardoapps.whosbirthday.activities.ActivityEdit
-import guepardoapps.whosbirthday.common.Constants
 import guepardoapps.whosbirthday.controller.BirthdayController
 import guepardoapps.whosbirthday.controller.NavigationController
 import guepardoapps.whosbirthday.database.birthday.DbBirthday
-import guepardoapps.whosbirthday.extensions.common.integerFormat
 import guepardoapps.whosbirthday.model.Birthday
 
 @ExperimentalUnsignedTypes
@@ -38,17 +36,11 @@ internal class BirthdayListAdapter(private val context: Context, private val lis
         lateinit var delete: FloatingActionButton
     }
 
-    override fun getItem(position: Int): Any {
-        return list[position]
-    }
+    override fun getItem(position: Int): Birthday = list[position]
 
-    override fun getItemId(position: Int): Long {
-        return list[position].id
-    }
+    override fun getItemId(position: Int): Long = list[position].id
 
-    override fun getCount(): Int {
-        return list.size
-    }
+    override fun getCount(): Int = list.size
 
     @SuppressLint("SetTextI18n", "ViewHolder", "InflateParams")
     override fun getView(index: Int, convertView: View?, parentView: ViewGroup?): View {
@@ -69,8 +61,8 @@ internal class BirthdayListAdapter(private val context: Context, private val lis
 
         holder.name.text = birthday.name
         holder.group.text = birthday.group
-        holder.date.text = "${birthday.day.integerFormat(2)}.${birthday.month.integerFormat(2)}.${birthday.year.integerFormat(4)}"
-        holder.age.text = "${birthday.getAge()}"
+        holder.date.text = birthday.dateText
+        holder.age.text = "${birthday.age}"
 
         holder.remindMe.isChecked = birthday.remindMe
         holder.remindMe.setOnCheckedChangeListener { _, isChecked ->
@@ -81,28 +73,28 @@ internal class BirthdayListAdapter(private val context: Context, private val lis
 
         holder.edit.setOnClickListener {
             val bundle = Bundle()
-            bundle.putLong(Constants.bundleDataId, birthday.id)
+            bundle.putLong(context.getString(R.string.bundleDataId), birthday.id)
             navigationController.navigateWithData(ActivityEdit::class.java, bundle, false)
         }
 
         holder.delete.setOnClickListener {
             MaterialDialog(context).show {
-                title(text = "Delete")
-                message(text = "Delete ${birthday.name}?")
-                positiveButton(text = "Yes") { DbBirthday(context).delete(birthday.id.toInt()) }
-                negativeButton(text = "No")
+                title(text = context.getString(R.string.delete))
+                message(text = String.format(context.getString(R.string.deleteRequest), birthday.name))
+                positiveButton(text = context.getString(R.string.yes)) { DbBirthday(context).delete(birthday.id.toInt()) }
+                negativeButton(text = context.getString(R.string.no))
             }
         }
 
-        if (birthday.hasBirthday()) {
+        if (birthday.hasBirthday) {
             rowView.setBackgroundColor(context.getColor(R.color.colorPrimaryDark))
             ParticleSystem(
                     context as Activity,
-                    150,
+                    context.resources.getInteger(R.integer.maxParticles),
                     R.drawable.particle,
-                    750)
+                    context.resources.getInteger(R.integer.timeToLive).toLong())
                     .setSpeedRange(0.2f, 0.5f)
-                    .oneShot(rowView, 150)
+                    .oneShot(rowView, context.resources.getInteger(R.integer.maxParticles))
         }
 
         return rowView

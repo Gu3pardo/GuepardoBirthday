@@ -31,9 +31,7 @@ internal class DbLogging(context: Context)
         onCreate(database)
     }
 
-    override fun onDowngrade(database: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        onUpgrade(database, oldVersion, newVersion)
-    }
+    override fun onDowngrade(database: SQLiteDatabase, oldVersion: Int, newVersion: Int) = onUpgrade(database, oldVersion, newVersion)
 
     fun addLog(dbLog: DbLog): Long {
         val values = ContentValues().apply {
@@ -43,8 +41,7 @@ internal class DbLogging(context: Context)
             put(ColumnDescription, dbLog.description)
         }
 
-        val database = this.writableDatabase
-        return database.insert(DatabaseTable, null, values)
+        return this.writableDatabase.insert(DatabaseTable, null, values)
     }
 
     companion object {

@@ -55,13 +55,9 @@ class ActivityMain : Activity(), BottomNavigation.OnMenuItemSelectionListener {
         subscription = null
     }
 
-    override fun onMenuItemSelect(itemId: Int, position: Int, fromUser: Boolean) {
-        performMenuAction(itemId)
-    }
+    override fun onMenuItemSelect(itemId: Int, position: Int, fromUser: Boolean) = performMenuAction(itemId)
 
-    override fun onMenuItemReselect(itemId: Int, position: Int, fromUser: Boolean) {
-        performMenuAction(itemId)
-    }
+    override fun onMenuItemReselect(itemId: Int, position: Int, fromUser: Boolean) = performMenuAction(itemId)
 
     private fun performMenuAction(itemId: Int) {
         when (itemId) {

@@ -3,7 +3,7 @@
     <string name="copyright">©2017 &#8211; 2019 GuepardoApps (Jonas Schubert)</string>
 
     <string name="create">Create</string>
-    <string name="edit"> Edit </string>
+    <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="send">Send</string>
     <string name="save">Save</string>
@@ -20,6 +20,9 @@
     <string name="ok">OK</string>
     <string name="neutral">Neutral</string>
     <string name="cancel">Cancel</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string name="birthday">Birthday</string>
     <string name="hint_name_birthday">Enter a name</string>
@@ -43,11 +46,18 @@
     <string name="author_title">Author</string>
     <string name="author">Jonas Schubert\nGuepardoApps</string>
     <string name="version_title">Version</string>
-    <string name="version">1.1.1.190522</string>
+    <string name="version">1.1.2.190525</string>
     <string name="email_title">E-Mail</string>
     <string name="email">guepardoapps@gmail.com</string>
     <string name="gitHubLink_title">GitHub</string>
     <string name="gitHubLink">https://github.com/GuepardoApps-Releases/WhosBirthday/</string>
     <string name="homepageLink_title">Homepage</string>
     <string name="homepageLink">https://guepardoapps.github.io/</string>
+
+    <string name="friends">Friends</string>
+
+    <string name="notificationTitle">Who\'s birthday</string>
+    <string name="notificationContent">"It is %s' %d birthday!"</string>
+
+    <string name="deleteRequest">Do you want to delete the birthday of %s?</string>
 </resources>

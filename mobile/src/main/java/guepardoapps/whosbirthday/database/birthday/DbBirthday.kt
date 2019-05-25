@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.content.Context
 import guepardoapps.whosbirthday.enum.DbBirthdayAction
-import guepardoapps.whosbirthday.extensions.common.toBoolean
-import guepardoapps.whosbirthday.extensions.common.toInteger
+import guepardoapps.whosbirthday.extensions.toBoolean
+import guepardoapps.whosbirthday.extensions.toInteger
 import guepardoapps.whosbirthday.model.Birthday
 import guepardoapps.whosbirthday.model.DbBirthdayActionPublishSubject
 
@@ -40,9 +40,7 @@ internal class DbBirthday(context: Context)
         onCreate(database)
     }
 
-    override fun onDowngrade(database: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        onUpgrade(database, oldVersion, newVersion)
-    }
+    override fun onDowngrade(database: SQLiteDatabase, oldVersion: Int, newVersion: Int) = onUpgrade(database, oldVersion, newVersion)
 
     fun add(birthday: Birthday): Long {
         val values = ContentValues().apply {
@@ -55,9 +53,7 @@ internal class DbBirthday(context: Context)
             put(ColumnRemindedMe, birthday.remindedMe.toInteger())
         }
 
-        val database = this.writableDatabase
-        val returnValue = database.insert(DatabaseTable, null, values)
-
+        val returnValue = this.writableDatabase.insert(DatabaseTable, null, values)
         DbBirthdayActionPublishSubject.instance.publishSubject.onNext(DbBirthdayAction.Add)
         return returnValue
     }
@@ -73,37 +69,21 @@ internal class DbBirthday(context: Context)
             put(ColumnRemindedMe, birthday.remindedMe.toInteger())
         }
 
-        val selection = "$ColumnId LIKE ?"
-        val selectionArgs = arrayOf(birthday.id.toString())
-
-        val database = this.writableDatabase
-        val returnValue = database.update(DatabaseTable, values, selection, selectionArgs)
-
+        val returnValue = this.writableDatabase.update(DatabaseTable, values, "$ColumnId LIKE ?", arrayOf(birthday.id.toString()))
         DbBirthdayActionPublishSubject.instance.publishSubject.onNext(DbBirthdayAction.Update)
         return returnValue
     }
 
     fun delete(id: Int): Int {
-        val database = this.writableDatabase
-
-        val selection = "$ColumnId LIKE ?"
-        val selectionArgs = arrayOf(id.toString())
-        val returnValue = database.delete(DatabaseTable, selection, selectionArgs)
-
+        val returnValue = this.writableDatabase.delete(DatabaseTable, "$ColumnId LIKE ?", arrayOf(id.toString()))
         DbBirthdayActionPublishSubject.instance.publishSubject.onNext(DbBirthdayAction.Delete)
         return returnValue
     }
 
     fun get(): MutableList<Birthday> {
-        val database = this.readableDatabase
-
-        val projection = arrayOf(ColumnId, ColumnName, ColumnGroup, ColumnDay, ColumnMonth, ColumnYear, ColumnRemindMe, ColumnRemindedMe)
-
-        val sortOrder = "$ColumnId ASC"
-
-        val cursor = database.query(
-                DatabaseTable, projection, null, null,
-                null, null, sortOrder)
+        val cursor = this.readableDatabase.query(DatabaseTable,
+                arrayOf(ColumnId, ColumnName, ColumnGroup, ColumnDay, ColumnMonth, ColumnYear, ColumnRemindMe, ColumnRemindedMe),
+                null, null, null, null, "$ColumnId ASC")
 
         val list = mutableListOf<Birthday>()
         with(cursor) {
@@ -131,18 +111,9 @@ internal class DbBirthday(context: Context)
     }
 
     fun findById(id: Long): MutableList<Birthday> {
-        val database = this.readableDatabase
-
-        val projection = arrayOf(ColumnId, ColumnName, ColumnGroup, ColumnDay, ColumnMonth, ColumnYear, ColumnRemindMe, ColumnRemindedMe)
-
-        val selection = "$ColumnId = ?"
-        val selectionArgs = arrayOf(id.toString())
-
-        val sortOrder = "$ColumnId ASC"
-
-        val cursor = database.query(
-                DatabaseTable, projection, selection, selectionArgs,
-                null, null, sortOrder)
+        val cursor = this.readableDatabase.query(DatabaseTable,
+                arrayOf(ColumnId, ColumnName, ColumnGroup, ColumnDay, ColumnMonth, ColumnYear, ColumnRemindMe, ColumnRemindedMe),
+                "$ColumnId = ?", arrayOf(id.toString()), null, null, "$ColumnId ASC")
 
         val list = mutableListOf<Birthday>()
         with(cursor) {
@@ -168,15 +139,9 @@ internal class DbBirthday(context: Context)
     }
 
     fun getNames(): MutableList<String> {
-        val database = this.readableDatabase
-
-        val projection = arrayOf(ColumnId, ColumnName, ColumnGroup, ColumnDay, ColumnMonth, ColumnYear, ColumnRemindMe, ColumnRemindedMe)
-
-        val sortOrder = "$ColumnId ASC"
-
-        val cursor = database.query(
-                DatabaseTable, projection, null, null,
-                null, null, sortOrder)
+        val cursor = this.readableDatabase.query(DatabaseTable,
+                arrayOf(ColumnId, ColumnName, ColumnGroup, ColumnDay, ColumnMonth, ColumnYear, ColumnRemindMe, ColumnRemindedMe),
+                null, null, null, null, "$ColumnId ASC")
 
         val list = mutableListOf<String>()
         with(cursor) {
@@ -190,15 +155,9 @@ internal class DbBirthday(context: Context)
     }
 
     fun getGroups(): MutableList<String> {
-        val database = this.readableDatabase
-
-        val projection = arrayOf(ColumnId, ColumnName, ColumnGroup, ColumnDay, ColumnMonth, ColumnYear, ColumnRemindMe, ColumnRemindedMe)
-
-        val sortOrder = "$ColumnId ASC"
-
-        val cursor = database.query(
-                DatabaseTable, projection, null, null,
-                null, null, sortOrder)
+        val cursor = this.readableDatabase.query(DatabaseTable,
+                arrayOf(ColumnId, ColumnName, ColumnGroup, ColumnDay, ColumnMonth, ColumnYear, ColumnRemindMe, ColumnRemindedMe),
+                null, null, null, null, "$ColumnId ASC")
 
         val list = mutableListOf<String>()
         with(cursor) {

@@ -9,8 +9,8 @@ android {
         applicationId "guepardoapps.whosbirthday"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 10101
-        versionName "1.1.1.190522"
+        versionCode 10102
+        versionName "1.1.2.190525"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
