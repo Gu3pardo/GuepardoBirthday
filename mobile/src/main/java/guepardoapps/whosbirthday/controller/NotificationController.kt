@@ -11,13 +11,16 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import androidx.annotation.NonNull
+import com.github.guepardoapps.kulid.ULID
 import guepardoapps.whosbirthday.extensions.circleBitmap
 import guepardoapps.whosbirthday.model.NotificationContent
 
 internal class NotificationController(@NonNull private val context: Context) : INotificationController {
 
     private val channelId: String = "guepardoapps.whosbirthday"
+
     private val channelName: String = "WhosBirthday"
+
     private val channelDescription: String = "Notifications for application WhosBirthday"
 
     private var notificationManager: NotificationManager? = null
@@ -65,7 +68,7 @@ internal class NotificationController(@NonNull private val context: Context) : I
                     .build()
         }
 
-        notificationManager?.notify(notificationContent.id, notification)
+        notificationManager?.notify(ULID.getTimestamp(notificationContent.id).toInt(), notification)
     }
 
     override fun close(id: Int) {

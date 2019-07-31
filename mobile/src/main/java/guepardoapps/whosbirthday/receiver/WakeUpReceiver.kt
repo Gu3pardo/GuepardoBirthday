@@ -9,11 +9,9 @@ import guepardoapps.whosbirthday.utils.Logger
 
 @ExperimentalUnsignedTypes
 class WakeUpReceiver : BroadcastReceiver() {
-    private val tag: String = WakeUpReceiver::class.java.simpleName
-
     @SuppressLint("UnsafeProtectedBroadcastReceiver")
     override fun onReceive(context: Context?, intent: Intent?) {
-        Logger.instance.debug(tag, "onReceive")
+        Logger.instance.debug(WakeUpReceiver::class.java.simpleName, "onReceive")
         BirthdayController().checkForBirthday(context!!)
     }
 }

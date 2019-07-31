@@ -11,7 +11,7 @@ import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Button
+import com.github.guepardoapps.kulid.ULID
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import guepardoapps.whosbirthday.R
 import guepardoapps.whosbirthday.controller.BirthdayController
@@ -25,80 +25,67 @@ import java.util.*
 @SuppressLint("SetTextI18n")
 class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
 
-    private lateinit var saveButton: Button
+    private var year: Int = Calendar.getInstance().get(Calendar.YEAR)
 
-    private var year: Int = 1970
-    private var month: Int = 0
-    private var dayOfMonth: Int = 1
-    private var birthday: Birthday? = null
+    private var month: Int = Calendar.getInstance().get(Calendar.MONTH)
+
+    private var dayOfMonth: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.side_add)
 
-        val now = Calendar.getInstance()
-        year = now.get(Calendar.YEAR)
-        month = now.get(Calendar.MONTH)
-        dayOfMonth = now.get(Calendar.DAY_OF_MONTH)
-
-        saveButton = findViewById(R.id.save_birthday_edit_button)
-        saveButton.isEnabled = false
-
         val textWatcher = object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
-                saveButton.isEnabled = true
-            }
+            override fun afterTextChanged(editable: Editable?) { save_birthday_edit_button.isEnabled = true }
 
-            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) { }
 
-            override fun onTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) { }
         }
 
-        birthday_name_edit_textview.setAdapter(ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, DbBirthday(this).getNames()))
+        birthday_name_edit_textview.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, DbBirthday(this).getNames()))
         birthday_name_edit_textview.addTextChangedListener(textWatcher)
 
-        birthday_group_edit_textview.setAdapter(ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, DbBirthday(this).getGroups()))
+        birthday_group_edit_textview.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, DbBirthday(this).getGroups()))
         birthday_group_edit_textview.addTextChangedListener(textWatcher)
 
         val data = intent.extras
+        var birthday: Birthday? = null
+
         if (data != null) {
-            val id = data.getLong(getString(R.string.bundleDataId))
+            val id = data.getString(getString(R.string.bundleDataId))!!
             birthday = DbBirthday(this).findById(id).firstOrNull()
             if (birthday != null) {
-                birthday_name_edit_textview.setText(birthday?.name)
-                birthday_group_edit_textview.setText(birthday?.group)
+                birthday_name_edit_textview.setText(birthday.name)
+                birthday_group_edit_textview.setText(birthday.group)
 
-                year = birthday?.year!!
-                month = birthday?.month!!
-                dayOfMonth = birthday?.day!!
-                birthday_DatePickerEditText
-                        .setText("${this.dayOfMonth.integerFormat(2)}.${(this.month + 1).integerFormat(2)}.${this.year.integerFormat(4)}")
+                year = birthday.year
+                month = birthday.month - 1
+                dayOfMonth = birthday.day
+
+                birthday_DatePickerEditText.setText("${this.dayOfMonth.integerFormat(2)}.${(this.month + 1).integerFormat(2)}.${this.year.integerFormat(4)}")
             }
         }
 
         val context = this
         var showedDialog = false
+
+        birthday_DatePickerEditText.setOnClickListener { showedDialog = showDatePickerDialog(showedDialog, context) }
+
         birthday_DatePickerEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
-                showedDialog = showDatePickerDialog(showedDialog, context)
-            }
+            override fun afterTextChanged(editable: Editable?) { showedDialog = showDatePickerDialog(showedDialog, context) }
 
-            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) { }
 
-            override fun onTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) { }
         })
-        birthday_DatePickerEditText.setOnClickListener {
-            showedDialog = showDatePickerDialog(showedDialog, context)
-        }
 
-        saveButton.setOnClickListener {
+        save_birthday_edit_button.isEnabled = false
+        save_birthday_edit_button.setOnClickListener {
             birthday_name_edit_textview.error = null
             birthday_group_edit_textview.error = null
+
             var cancel = false
             var focusView: View? = null
 
@@ -122,14 +109,14 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
                 if (birthday != null) {
                     DbBirthday(this)
                             .update(Birthday(
-                                    id = birthday?.id!!,
+                                    id = birthday.id,
                                     name = name, group = group,
                                     day = dayOfMonth, month = month + 1, year = year,
-                                    remindMe = birthday?.remindMe!!, remindedMe = birthday?.remindedMe!!))
+                                    remindMe = birthday.remindMe, remindedMe = birthday.remindedMe))
                 } else {
                     DbBirthday(this)
                             .add(Birthday(
-                                    id = 0,
+                                    id = ULID.random(),
                                     name = name, group = group,
                                     day = dayOfMonth, month = month + 1, year = year,
                                     remindMe = true, remindedMe = false))
@@ -150,19 +137,17 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
     }
 
     @Suppress("DEPRECATION")
-    private fun showDatePickerDialog(showedDialog: Boolean, context: ActivityEdit): Boolean {
-        return if (!showedDialog) {
-            val datePickerDialog: DatePickerDialog = DatePickerDialog.newInstance(
-                    context,
-                    year,
-                    month,
-                    dayOfMonth
-            )
-            datePickerDialog.show(fragmentManager, "DatePickerDialog")
-            true
-        } else {
-            false
-        }
+    private fun showDatePickerDialog(showedDialog: Boolean, context: ActivityEdit): Boolean = if (!showedDialog) {
+        val datePickerDialog: DatePickerDialog = DatePickerDialog.newInstance(
+                context,
+                year,
+                month,
+                dayOfMonth
+        )
+        datePickerDialog.show(fragmentManager, "DatePickerDialog")
+        true
+    } else {
+        false
     }
 
     private fun createErrorText(errorString: String): SpannableStringBuilder {

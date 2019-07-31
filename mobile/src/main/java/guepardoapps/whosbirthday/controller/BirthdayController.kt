@@ -15,7 +15,7 @@ internal class BirthdayController : IBirthdayController {
             if (birthday.hasBirthday && birthday.remindMe && !birthday.remindedMe) {
 
                 val notificationContent = NotificationContent(
-                        id = context.resources.getInteger(R.integer.notificationDefaultId) + birthday.id.toInt(),
+                        id = birthday.id,
                         title = context.getString(R.string.notificationTitle),
                         text = String.format(context.getString(R.string.notificationContent), birthday.name, birthday.age),
                         iconId = R.mipmap.ic_launcher,

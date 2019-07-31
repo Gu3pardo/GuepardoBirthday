@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.side_main.*
 
 @ExperimentalUnsignedTypes
 class ActivityMain : Activity(), BottomNavigation.OnMenuItemSelectionListener {
-    private val tag: String = ActivityMain::class.java.simpleName
 
     private var subscription: Disposable? = null
 
@@ -33,11 +32,17 @@ class ActivityMain : Activity(), BottomNavigation.OnMenuItemSelectionListener {
                                 DbBirthdayAction.Add -> listView.adapter = BirthdayListAdapter(this, DbBirthday(this).get().toTypedArray())
                                 DbBirthdayAction.Update -> listView.adapter = BirthdayListAdapter(this, DbBirthday(this).get().toTypedArray())
                                 DbBirthdayAction.Delete -> listView.adapter = BirthdayListAdapter(this, DbBirthday(this).get().toTypedArray())
-                                else -> Logger.instance.verbose(tag, "No action needed for dbBirthdayAction $dbBirthdayAction")
+                                else -> Logger.instance.verbose(ActivityMain::class.java.simpleName, "No action needed for dbBirthdayAction $dbBirthdayAction")
                             }
                         },
                         { }
                 )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        subscription?.dispose()
+        subscription = null
     }
 
     override fun onResume() {
@@ -49,22 +54,16 @@ class ActivityMain : Activity(), BottomNavigation.OnMenuItemSelectionListener {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        subscription?.dispose()
-        subscription = null
-    }
+    override fun onMenuItemReselect(itemId: Int, position: Int, fromUser: Boolean) = performMenuAction(itemId)
 
     override fun onMenuItemSelect(itemId: Int, position: Int, fromUser: Boolean) = performMenuAction(itemId)
-
-    override fun onMenuItemReselect(itemId: Int, position: Int, fromUser: Boolean) = performMenuAction(itemId)
 
     private fun performMenuAction(itemId: Int) {
         when (itemId) {
             R.id.item_add -> NavigationController(this).navigate(ActivityEdit::class.java, false)
             R.id.item_settings -> NavigationController(this).navigate(ActivitySettings::class.java, false)
             R.id.item_about -> NavigationController(this).navigate(ActivityAbout::class.java, false)
-            else -> Logger.instance.error(tag, "Found no menu entry with id $itemId")
+            else -> Logger.instance.error(ActivityMain::class.java.simpleName, "Found no menu entry with id $itemId")
         }
     }
 }

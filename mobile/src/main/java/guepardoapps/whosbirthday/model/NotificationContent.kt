@@ -1,7 +1,7 @@
 package guepardoapps.whosbirthday.model
 
 internal data class NotificationContent(
-        val id: Int,
+        val id: String,
         val title: String,
         val text: String,
         val iconId: Int,

@@ -3,7 +3,8 @@ package guepardoapps.whosbirthday.activities
 import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
-import com.github.guepardoapps.timext.kotlin.extensions.milliseconds
+import com.github.guepardoapps.kulid.ULID
+import com.github.guepardoapps.timext.kotlin.extensions.millis
 import com.github.guepardoapps.timext.kotlin.postDelayed
 import guepardoapps.whosbirthday.R
 import guepardoapps.whosbirthday.controller.NavigationController
@@ -31,8 +32,9 @@ class ActivityBoot : Activity() {
 
             DbBirthday(this)
                     .add(Birthday(
-                            id = 0,
-                            name = "Jonas Schubert", group = getString(R.string.friends),
+                            id = ULID.random(),
+                            name = "Jonas Schubert",
+                            group = getString(R.string.friends),
                             day = 2, month = 1, year = 1990,
                             remindMe = true, remindedMe = false))
         }
@@ -46,10 +48,10 @@ class ActivityBoot : Activity() {
 
         if (systemInfoController.currentAndroidApi() >= android.os.Build.VERSION_CODES.M) {
             if (systemInfoController.checkAPI23SystemPermission(resources.getInteger(R.integer.systemPermissionId))) {
-                Handler().postDelayed({ navigationController.navigate(ActivityMain::class.java, true) }, resources.getInteger(R.integer.bootNavigationDelayInMs).milliseconds)
+                Handler().postDelayed({ navigationController.navigate(ActivityMain::class.java, true) }, resources.getInteger(R.integer.bootNavigationDelayInMs).millis)
             }
         } else {
-            Handler().postDelayed({ navigationController.navigate(ActivityMain::class.java, true) }, resources.getInteger(R.integer.bootNavigationDelayInMs).milliseconds)
+            Handler().postDelayed({ navigationController.navigate(ActivityMain::class.java, true) }, resources.getInteger(R.integer.bootNavigationDelayInMs).millis)
         }
     }
 }
