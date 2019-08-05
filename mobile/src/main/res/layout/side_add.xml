@@ -6,7 +6,7 @@
     android:background="@color/cardview_shadow_start_color"
     android:padding="10dp">
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cardview_light_background"
@@ -19,7 +19,7 @@
             android:background="@color/colorPrimary"
             android:padding="5dp">
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/birthday_NameInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,9 +37,9 @@
                     android:nextFocusDown="@+id/birthday_edit_datePicker"
                     android:nextFocusRight="@+id/birthday_edit_datePicker"
                     android:textColor="#FFFFFF" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/birthday_GroupInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,9 +57,9 @@
                     android:nextFocusDown="@+id/birthday_DatePickerButton"
                     android:nextFocusRight="@+id/birthday_DatePickerButton"
                     android:textColor="#FFFFFF" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/birthday_DateInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                     android:nextFocusDown="@+id/save_birthday_edit_button"
                     android:nextFocusRight="@+id/save_birthday_edit_button"
                     android:textColor="#FFFFFF" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.rey.material.widget.Button
                 android:id="@+id/save_birthday_edit_button"
@@ -96,5 +96,5 @@
                 app:rd_rippleColor="@color/colorPrimary"
                 app:rd_rippleType="touch" />
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

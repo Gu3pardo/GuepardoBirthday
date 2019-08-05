@@ -59,8 +59,8 @@ internal class DbBirthday(context: Context)
         return returnValue
     }
 
-    fun delete(id: Int): Int {
-        val returnValue = this.writableDatabase.delete(DatabaseTable, "$ColumnId LIKE ?", arrayOf(id.toString()))
+    fun delete(id: String): Int {
+        val returnValue = this.writableDatabase.delete(DatabaseTable, "$ColumnId LIKE ?", arrayOf(id))
         DbBirthdayActionPublishSubject.instance.publishSubject.onNext(DbBirthdayAction.Delete)
         return returnValue
     }

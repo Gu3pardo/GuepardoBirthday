@@ -25,14 +25,16 @@ import guepardoapps.whosbirthday.utils.Logger
 @ExperimentalUnsignedTypes
 class FloatingService : Service() {
 
-    private val windowManager: WindowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    private lateinit var windowManager: WindowManager
 
-    private val bubbleView: ImageView = ImageView(this)
+    private lateinit var bubbleView: ImageView
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
         super.onCreate()
+        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        bubbleView = ImageView(this)
         initBubbleView()
     }
 
@@ -52,7 +54,7 @@ class FloatingService : Service() {
         val systemInfoController = SystemInfoController(this)
 
         var bubbleMoved = false
-        var bubbleParamsStore: WindowManager.LayoutParams? = null
+        var bubbleParamsStore: WindowManager.LayoutParams?
 
         val params = WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
@@ -181,6 +183,7 @@ class FloatingService : Service() {
             }
         }
 
+        bubbleParamsStore = params
         windowManager.addView(bubbleView, bubbleParamsStore)
     }
 }

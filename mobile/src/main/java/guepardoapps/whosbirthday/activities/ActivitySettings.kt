@@ -11,13 +11,16 @@ import kotlinx.android.synthetic.main.side_settings.*
 @ExperimentalUnsignedTypes
 class ActivitySettings : Activity() {
 
-    private val sharedPreferenceController: SharedPreferenceController = SharedPreferenceController(this)
+    private lateinit var sharedPreferenceController: SharedPreferenceController
 
-    private val systemInfoController: SystemInfoController = SystemInfoController(this)
+    private lateinit var systemInfoController: SystemInfoController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.side_settings)
+
+        sharedPreferenceController = SharedPreferenceController(this)
+        systemInfoController = SystemInfoController(this)
 
         switchBubbleState.isChecked = sharedPreferenceController.load(getString(R.string.sharedPrefBubbleState), false)
         switchBubbleState.setOnCheckedChangeListener { _, isChecked ->

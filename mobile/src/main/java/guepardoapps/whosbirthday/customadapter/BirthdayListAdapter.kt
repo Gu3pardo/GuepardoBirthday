@@ -64,7 +64,7 @@ internal class BirthdayListAdapter(private val context: Context, private val lis
                 MaterialDialog(context).show {
                     title(text = context.getString(R.string.delete))
                     message(text = String.format(context.getString(R.string.deleteRequest), birthday.name))
-                    positiveButton(text = context.getString(R.string.yes)) { DbBirthday(context).delete(birthday.id.toInt()) }
+                    positiveButton(text = context.getString(R.string.yes)) { DbBirthday(context).delete(birthday.id) }
                     negativeButton(text = context.getString(R.string.no))
                 }
             }
