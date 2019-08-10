@@ -16,16 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@color/colorPrimary"
             android:padding="5dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/birthday_NameInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true">
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/birthday_name_edit_textview"
@@ -34,18 +33,18 @@
                     android:hint="@string/prompt_birthday_name"
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
-                    android:nextFocusDown="@+id/birthday_edit_datePicker"
                     android:nextFocusRight="@+id/birthday_edit_datePicker"
-                    android:textColor="#FFFFFF" />
+                    android:nextFocusDown="@+id/birthday_edit_datePicker"
+                    android:textColor="#000" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/birthday_GroupInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/birthday_NameInputLayout"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/birthday_NameInputLayout">
+                android:layout_alignParentEnd="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/birthday_group_edit_textview"
@@ -54,18 +53,18 @@
                     android:hint="@string/prompt_birthday_group"
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
-                    android:nextFocusDown="@+id/birthday_DatePickerButton"
                     android:nextFocusRight="@+id/birthday_DatePickerButton"
-                    android:textColor="#FFFFFF" />
+                    android:nextFocusDown="@+id/birthday_DatePickerButton"
+                    android:textColor="#000" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/birthday_DateInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/birthday_GroupInputLayout"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/birthday_GroupInputLayout">
+                android:layout_alignParentEnd="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/birthday_DatePickerEditText"
@@ -74,26 +73,26 @@
                     android:hint="@string/hint_date_birthday"
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
-                    android:nextFocusDown="@+id/save_birthday_edit_button"
                     android:nextFocusRight="@+id/save_birthday_edit_button"
-                    android:textColor="#FFFFFF" />
+                    android:nextFocusDown="@+id/save_birthday_edit_button"
+                    android:textColor="#000" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.rey.material.widget.Button
+            <com.rey.material.widget.FloatingActionButton
                 android:id="@+id/save_birthday_edit_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="16dp"
-                android:text="@string/save"
-                android:textColor="@color/colorTextIcon"
-                android:textStyle="bold"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:contentDescription="@string/contentDescription"
+                app:fab_iconSize="30dp"
+                app:fab_iconSrc="@drawable/baseline_save_white_48"
+                app:fab_radius="17dp"
+                app:rd_backgroundColor="@color/DarkPrimary"
                 app:rd_delayClick="none"
                 app:rd_enable="true"
-                app:rd_rippleColor="@color/colorPrimary"
+                app:rd_rippleColor="@color/colorAccent"
                 app:rd_rippleType="touch" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

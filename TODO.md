@@ -7,5 +7,3 @@
 	- [ ] add picture of contact if available and only one birthday detected
 - [ ] improve check of birthdays using schedule instead or additional to BroadcastReceiver
 - [x] update libraries
-- [ ] fix layout context
-- [ ] fix nextFocus in edit view

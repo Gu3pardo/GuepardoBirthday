@@ -19,7 +19,6 @@ class ActivityBoot : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.side_boot)
-
         val sharedPreferenceController = SharedPreferenceController(this)
 
         if (!sharedPreferenceController.load(getString(R.string.sharedPrefName), false)) {

@@ -25,11 +25,13 @@ import java.util.*
 @SuppressLint("SetTextI18n")
 class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
 
-    private var year: Int = Calendar.getInstance().get(Calendar.YEAR)
+    private val activityContext = this
+
+    private var dayOfMonth: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
 
     private var month: Int = Calendar.getInstance().get(Calendar.MONTH)
 
-    private var dayOfMonth: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    private var year: Int = Calendar.getInstance().get(Calendar.YEAR)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,18 +39,23 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
         setContentView(R.layout.side_add)
 
         val textWatcher = object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) { save_birthday_edit_button.isEnabled = true }
+            override fun afterTextChanged(editable: Editable?) {
+                save_birthday_edit_button.isEnabled = true
+            }
 
-            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
         }
 
-        birthday_name_edit_textview.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, DbBirthday(this).getNames()))
-        birthday_name_edit_textview.addTextChangedListener(textWatcher)
-
-        birthday_group_edit_textview.setAdapter(ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, DbBirthday(this).getGroups()))
-        birthday_group_edit_textview.addTextChangedListener(textWatcher)
+        birthday_name_edit_textview.apply {
+            setAdapter(ArrayAdapter(activityContext, android.R.layout.simple_dropdown_item_1line, DbBirthday(activityContext).getNames()))
+            addTextChangedListener(textWatcher)
+        }
+        birthday_group_edit_textview.apply {
+            setAdapter(ArrayAdapter(activityContext, android.R.layout.simple_dropdown_item_1line, DbBirthday(activityContext).getGroups()))
+            addTextChangedListener(textWatcher)
+        }
 
         val data = intent.extras
         var birthday: Birthday? = null
@@ -68,61 +75,64 @@ class ActivityEdit : Activity(), DatePickerDialog.OnDateSetListener {
             }
         }
 
-        val context = this
         var showedDialog = false
-
-        birthday_DatePickerEditText.setOnClickListener { showedDialog = showDatePickerDialog(showedDialog, context) }
-
-        birthday_DatePickerEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) { showedDialog = showDatePickerDialog(showedDialog, context) }
-
-            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) { }
-
-            override fun onTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) { }
-        })
-
-        save_birthday_edit_button.isEnabled = false
-        save_birthday_edit_button.setOnClickListener {
-            birthday_name_edit_textview.error = null
-            birthday_group_edit_textview.error = null
-
-            var cancel = false
-            var focusView: View? = null
-
-            val name = birthday_name_edit_textview.text.toString()
-            if (TextUtils.isEmpty(name)) {
-                birthday_name_edit_textview.error = createErrorText(getString(R.string.error_field_required))
-                focusView = birthday_name_edit_textview
-                cancel = true
-            }
-
-            val group = birthday_group_edit_textview.text.toString()
-            if (TextUtils.isEmpty(group)) {
-                birthday_group_edit_textview.error = createErrorText(getString(R.string.error_field_required))
-                focusView = birthday_group_edit_textview
-                cancel = true
-            }
-
-            if (cancel) {
-                focusView?.requestFocus()
-            } else {
-                if (birthday != null) {
-                    DbBirthday(this)
-                            .update(Birthday(
-                                    id = birthday.id,
-                                    name = name, group = group,
-                                    day = dayOfMonth, month = month + 1, year = year,
-                                    remindMe = birthday.remindMe, remindedMe = birthday.remindedMe))
-                } else {
-                    DbBirthday(this)
-                            .add(Birthday(
-                                    id = ULID.random(),
-                                    name = name, group = group,
-                                    day = dayOfMonth, month = month + 1, year = year,
-                                    remindMe = true, remindedMe = false))
+        birthday_DatePickerEditText.apply {
+            setOnClickListener { showedDialog = showDatePickerDialog(showedDialog, activityContext) }
+            addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(editable: Editable?) {
+                    showedDialog = showDatePickerDialog(showedDialog, activityContext)
                 }
-                BirthdayController().checkForBirthday(this)
-                finish()
+
+                override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
+            })
+        }
+
+        save_birthday_edit_button.apply {
+            isEnabled = false
+            setOnClickListener {
+                birthday_name_edit_textview.error = null
+                birthday_group_edit_textview.error = null
+
+                var cancel = false
+                var focusView: View? = null
+
+                val name = birthday_name_edit_textview.text.toString()
+                if (TextUtils.isEmpty(name)) {
+                    birthday_name_edit_textview.error = createErrorText(getString(R.string.error_field_required))
+                    focusView = birthday_name_edit_textview
+                    cancel = true
+                }
+
+                val group = birthday_group_edit_textview.text.toString()
+                if (TextUtils.isEmpty(group)) {
+                    birthday_group_edit_textview.error = createErrorText(getString(R.string.error_field_required))
+                    focusView = birthday_group_edit_textview
+                    cancel = true
+                }
+
+                if (cancel) {
+                    focusView?.requestFocus()
+                } else {
+                    if (birthday != null) {
+                        DbBirthday(activityContext)
+                                .update(Birthday(
+                                        id = birthday.id,
+                                        name = name, group = group,
+                                        day = dayOfMonth, month = month + 1, year = year,
+                                        remindMe = birthday.remindMe, remindedMe = birthday.remindedMe))
+                    } else {
+                        DbBirthday(activityContext)
+                                .add(Birthday(
+                                        id = ULID.random(),
+                                        name = name, group = group,
+                                        day = dayOfMonth, month = month + 1, year = year,
+                                        remindMe = true, remindedMe = false))
+                    }
+                    BirthdayController().checkForBirthday(activityContext)
+                    finish()
+                }
             }
         }
     }
